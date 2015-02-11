@@ -1,0 +1,21 @@
+{
+  "name": "CMS",
+  "version": "0.0.0",
+  "authors": [
+    "Publibrand <info@publibrand.com.br>"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/assets/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.*",
+    "jquery-form": "~3.*",
+    "normalize.css": "~3.*"
+  }
+}
