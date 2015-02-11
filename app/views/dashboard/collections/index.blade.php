@@ -2,8 +2,8 @@
 
 @section('content')
 	
-	@foreach($forms as $form)
-		{{{ $form }}}
+	@foreach($collections as $collection)
+		{{{ $collection }}}
 	@endforeach
 
 @stop
