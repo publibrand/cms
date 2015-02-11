@@ -20,6 +20,7 @@ class CollectionController extends BaseController {
 
 	public function store() {
 
+		
 
 	}
 
@@ -27,7 +28,7 @@ class CollectionController extends BaseController {
 	public function show($id){
 
 		$collection = Collection::find($id);
-
+		
 		return View::make('dashboard.collections.index')
 				   ->with('collection', $collection);
 
