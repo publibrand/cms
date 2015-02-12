@@ -1,0 +1,41 @@
+var Collections = (function() {
+
+    var _private = {};
+    var _public = {};
+    
+    _public.addField = function(fieldNumber) {
+
+        $.post(BASEURL + "/collections/addField", {
+            fieldNumber: fieldNumber,
+        }).done(function(data){
+            $('.form-fields').append(data.view);
+        });
+
+    }
+
+    return _public;
+
+}());
+
+
+$('form.collection-form').on('click', '.add-field', function () {
+
+    var fieldNumber = $(this).attr('data-field-number');
+    
+    $(this).attr('data-field-number', parseInt(fieldNumber) + 1);
+
+    Collections.addField(fieldNumber);
+
+});
+
+$('form.collection-form').on('change', 'select', function () {
+
+    var $options = $(this).parent().parent().find('.collection-options');
+
+    if($(this).hasClass("collection-type") && $(this).val() == 'select') {
+        $options.fadeIn();
+    } else {
+        $options.fadeOut();
+    }
+
+});

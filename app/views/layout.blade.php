@@ -4,11 +4,11 @@
         'javascript' => [
             'assets/vendor/jquery/dist/jquery.min.js',
             'assets/vendor/jquery-form/jquery.form.js',
-            'assets/js/scripts.js',
+            'assets/js/scripts.min.js',
         ],
         'stylesheet' => [
             'assets/vendor/normalize.css/normalize.css',
-            'assets/css/style.css',
+            'assets/css/style.min.css',
         ],
     ];
 

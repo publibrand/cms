@@ -15,7 +15,6 @@ class CreateCollectionsTable extends Migration {
 			$table->increments('id')->unsigned();
 			$table->string('name');
 			$table->text('form');
-			$table->boolean('is_page');
 			$table->integer('parent_id');
 			$table->integer('max');
 			$table->integer('order');

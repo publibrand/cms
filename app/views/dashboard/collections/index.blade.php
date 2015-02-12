@@ -3,7 +3,7 @@
 @section('content')
 	
 	@foreach($collections as $collection)
-		{{{ $collection }}}
+		{{ $collection }}
 	@endforeach
 
 @stop

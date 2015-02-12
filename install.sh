@@ -1,6 +1,7 @@
 #!/bin/sh
 echo -e "-------------- Installing Dependencies  --------------\n"
 composer install
+npm install
 bower install
 echo -e "\n"
 

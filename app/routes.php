@@ -137,5 +137,10 @@ Route::group(array('before' => 'auth'), function() {
 		'uses' => 'CollectionController@destroy',
 	));
 
+	Route::post('/collections/addField', array(
+		'as' => 'collections.addField',
+		'uses' => 'CollectionController@addField',
+	));
+
 });
 
