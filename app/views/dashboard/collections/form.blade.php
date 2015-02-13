@@ -1,5 +1,5 @@
 @if(isset($collection))
-	{{ Form::model($collection, ['route' => array('collections.update', $user->id), 'method' => 'PUT', 'class' => 'ajax-form']) }}
+	{{ Form::model($collection, ['route' => array('collections.update', $collection->id), 'method' => 'PUT', 'class' => 'ajax-form']) }}
 @else
 	{{ Form::open(['route' => 'collections.store', 'method' => 'POST', 'class' => 'ajax-form collection-form']) }}
 @endif
@@ -16,8 +16,11 @@
 		<span class="form-message"></span>
 	</div>
 
-
-	<div class="form-fields"></div>
+	<div class="form-fields">
+		@if(isset($collection))
+			
+		@endif
+	</div>
 	
 	<div class="form-group">
 		{{ Form::button('Add field', ['class' => 'add-field', 'data-field-number' => 1]); }}

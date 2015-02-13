@@ -56,7 +56,7 @@ class CollectionController extends BaseController {
 
 		$collection = new Collection;
 		$collection->name = Input::get('name');
-		$collection->form = str_replace("'", "",json_encode(Input::get('fields')));
+		$collection->fields = str_replace("'", "",json_encode(Input::get('fields')));
 
 		$max = Input::get('max');
 		$collection->max = empty($max) ? -1 : $max;
@@ -84,9 +84,11 @@ class CollectionController extends BaseController {
 	public function edit($id) {
 
 		$collection = Collection::find($id);
+		$fields = json_decode($collection->fields);
 
 		return View::make('dashboard.collections.edit')
-				   ->with('collection', $collection);
+				   ->with('collection', $collection)
+				   ->with('fields', $fields);
 	
 	}
 
