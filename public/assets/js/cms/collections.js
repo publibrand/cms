@@ -13,6 +13,12 @@ var Collections = (function() {
 
     }
 
+    _public.removeField = function($formField) {
+
+        $formField.remove();
+
+    }
+
     return _public;
 
 }());
@@ -28,14 +34,37 @@ $('form.collection-form').on('click', '.add-field', function () {
 
 });
 
-$('form.collection-form').on('change', 'select', function () {
+$('form.collection-form').on('click', '.remove-field', function () {
 
+    $formField = $(this).parent().parent();
+
+    Collections.removeField($formField);
+
+});
+
+$('form.collection-form').on('keyup', '#name', function () {
+
+    Form.slug($(this).val(), $('#slug'));
+
+});
+
+$('form.collection-form').on('keyup', '.field-name', function () {
+
+    var $field = $(this).parent().parent().find('.field-label');
+
+    Form.slug($(this).val(), $field, '_');
+
+});
+
+$('form.collection-form').on('change', 'select', function () {
     var $options = $(this).parent().parent().find('.collection-options');
 
     if($(this).hasClass("collection-type") && $(this).val() == 'select') {
         $options.fadeIn();
     } else {
         $options.fadeOut();
+        $options.find('input')
+                .val('');
     }
 
 });

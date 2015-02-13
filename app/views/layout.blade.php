@@ -4,6 +4,7 @@
         'javascript' => [
             'assets/vendor/jquery/dist/jquery.min.js',
             'assets/vendor/jquery-form/jquery.form.js',
+            'assets/vendor/speakingurl/speakingurl.min.js',
             'assets/js/scripts.min.js',
         ],
         'stylesheet' => [

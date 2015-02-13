@@ -137,6 +137,14 @@ var Form = (function(){
 
     }
 
+    _public.slug = function(str, $to, separator) {
+
+        separator  = separator  || '-';
+
+        $to.val(getSlug(str, separator));
+
+    }
+
     _public.csrf = function(){
 
         $.ajaxSetup({

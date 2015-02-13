@@ -18,14 +18,16 @@ class CollectionController extends BaseController {
 	}
 
 
-	public function store() {
+	private function generateLabelsAndRules() {
 
 		$labels = [
 			'name' => 'Name',
+			'slug' => 'Slug'
 		];
 
 		$rules = [
             'name' => 'required',
+            'slug' => 'required',
 		];
 
 		foreach(Input::get('fields') as $key => $values) {
@@ -46,7 +48,26 @@ class CollectionController extends BaseController {
 			} 
 		}
 
-        $validator = Validator::make(Input::all(), $rules, [], $labels);
+		return [
+			'labels' => $labels,
+			'rules' => $rules,
+		];
+
+	}
+
+	private function formatFields($field) {
+		return str_replace("'", "", json_encode($field));
+	}
+
+	private function formatMax($max) {
+		return empty($max) ? -1 : $max;
+	}
+
+	public function store() {
+		
+		$labelsAndRules = $this->generateLabelsAndRules();
+
+        $validator = Validator::make(Input::all(), $labelsAndRules['rules'], [], $labelsAndRules['labels']);
 
 		if($validator->fails()) {
 			return Response::json([
@@ -56,11 +77,9 @@ class CollectionController extends BaseController {
 
 		$collection = new Collection;
 		$collection->name = Input::get('name');
-		$collection->fields = str_replace("'", "",json_encode(Input::get('fields')));
-
-		$max = Input::get('max');
-		$collection->max = empty($max) ? -1 : $max;
-		
+		$collection->slug = Input::get('slug');
+		$collection->fields = $this->formatFields(Input::get('fields'));
+		$collection->max = $this->formatMax(Input::get('max'));
 		$collection->save();
 
 		return Response::json([
@@ -94,6 +113,28 @@ class CollectionController extends BaseController {
 
 	public function update($id) {
 
+		$labelsAndRules = $this->generateLabelsAndRules();
+
+        $validator = Validator::make(Input::all(), $labelsAndRules['rules'], [], $labelsAndRules['labels']);
+
+		if($validator->fails()) {
+			return Response::json([
+				'errors' => $validator->getMessageBag()->toArray(),
+            ], 400); 
+		}
+
+		$collection = Collection::find($id);
+		$collection->name = Input::get('name');
+		$collection->slug = Input::get('slug');
+		$collection->fields = $this->formatFields(Input::get('fields'));
+		$collection->max = $this->formatMax(Input::get('max'));
+		$collection->save();
+
+		return Response::json([
+			'collection' => $collection,
+			'redirect' => route('collections'),
+			'timeiout' => 1000,
+		], 200);
 
 	}
 

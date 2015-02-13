@@ -14,6 +14,7 @@ class CreateCollectionsTable extends Migration {
 		Schema::create('collections', function($table) {
 			$table->increments('id')->unsigned();
 			$table->string('name');
+			$table->text('slug');
 			$table->text('fields');
 			$table->integer('parent_id');
 			$table->integer('max');
