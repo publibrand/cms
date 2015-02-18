@@ -39,6 +39,6 @@ gulp.task('default', ['js', 'stylus']);
 
 gulp.task('watch', function() {
     livereload.listen();
-    gulp.watch('public/assets/js/**/*.js', ['js']);
-    gulp.watch('public/assets/css/**/*.styl', ['stylus']);
+    gulp.watch('public/dev/js/**/*.js', ['js']);
+    gulp.watch('public/dev/stylus/**/*.styl', ['stylus']);
 });

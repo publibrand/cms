@@ -8,7 +8,6 @@
             'assets/js/scripts.min.js',
         ],
         'stylesheet' => [
-            'assets/vendor/normalize.css/normalize.css',
             'assets/css/style.min.css',
         ],
     ];
