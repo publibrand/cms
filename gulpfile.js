@@ -7,20 +7,25 @@ var stylus = require('gulp-stylus');
 var uglify = require('gulp-uglify'); 
 var livereload = require('gulp-livereload');
 var rename = require('gulp-rename');
+var autoprefixer = require('gulp-autoprefixer');
 
-// ---- Concat ---- //
+// ---- Compile Stylus ---- //
 
-gulp.task('css', function() {
+gulp.task('stylus', function() {
     gulp.src("public/dev/stylus/**.styl")
         .pipe(stylus({
             compress: true,
+        }))
+        .pipe(autoprefixer({
+            browsers: ['last 100 versions'],
+            cascade: false
         }))
         .pipe(rename('style.min.css'))
         .pipe(gulp.dest('public/assets/css'))
         .pipe(livereload());
 });
 
-// ---- Concat and Minify ---- //
+// ---- Concat and Minify JS ---- //
 
 gulp.task('js', function() {
     gulp.src('public/dev/js/**/*.js')
@@ -30,10 +35,10 @@ gulp.task('js', function() {
       .pipe(livereload());
 });
 
-gulp.task('default', ['js', 'css']);
+gulp.task('default', ['js', 'stylus']);
 
 gulp.task('watch', function() {
     livereload.listen();
     gulp.watch('public/assets/js/**/*.js', ['js']);
-    gulp.watch('public/assets/css/**/*.css', ['css']);
+    gulp.watch('public/assets/css/**/*.styl', ['stylus']);
 });
