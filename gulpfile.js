@@ -3,16 +3,19 @@
 var gulp = require('gulp');
 
 var concat = require('gulp-concat');
-var minifycss = require('gulp-minify-css');
+var stylus = require('gulp-stylus');
 var uglify = require('gulp-uglify'); 
 var livereload = require('gulp-livereload');
+var rename = require('gulp-rename');
 
 // ---- Concat ---- //
 
 gulp.task('css', function() {
-    gulp.src(["public/assets/css/*.css", "!public/assets/css/style.min.css"])
-        .pipe(minifycss())
-        .pipe(concat('style.min.css'))
+    gulp.src("public/dev/stylus/**.styl")
+        .pipe(stylus({
+            compress: true,
+        }))
+        .pipe(rename('style.min.css'))
         .pipe(gulp.dest('public/assets/css'))
         .pipe(livereload());
 });
@@ -20,7 +23,7 @@ gulp.task('css', function() {
 // ---- Concat and Minify ---- //
 
 gulp.task('js', function() {
-    gulp.src(['public/assets/js/**/*.js', "!public/assets/js/scripts.min.js"])
+    gulp.src('public/dev/js/**/*.js')
       .pipe(concat('scripts.min.js'))
       .pipe(uglify())
       .pipe(gulp.dest('public/assets/js'))
