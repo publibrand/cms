@@ -23,6 +23,12 @@ Route::get('/auth/logout', array(
 	'uses' => 'AuthController@logout',
 ));
 
+Route::get('/auth/lost', array(
+	'as' => 'auth.lost',
+	'before' => 'guest',
+	'uses' => 'AuthController@lost',
+));
+
 /*
 |--------------------------------------------------------------------------
 | Security Routes

@@ -1,15 +1,35 @@
+// #### RESET #### //
+
 @import 'normalize';
-
-$tablet = 768px;
-$mobile = 480px;
-
-@import 'mixins';
 
 *,
 *:before,
 *:after {
 	box-sizing: border-box;
 }
+
+html,
+body {
+	height: 100%;
+}
+
+header,
+section,
+article,
+nav,
+footer {
+	float: left;
+	width: 100%;
+}
+
+// #### IMPORT #### //
+
+$tablet = 768px;
+$mobile = 480px;
+
+@import 'mixins';
+
+// #### SHARED #### //
 
 .clear-fix {
 	zoom: 1;
@@ -21,4 +41,11 @@ $mobile = 480px;
 	&:after{
 		clear: both;
 	}
+}
+
+.container {
+	max-width: 1024px;
+	width: 100%;
+	margin: 0 auto;
+	padding: 0 20px;
 }

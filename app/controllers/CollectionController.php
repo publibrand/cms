@@ -17,7 +17,6 @@ class CollectionController extends BaseController {
 
 	}
 
-
 	private function generateLabelsAndRules() {
 
 		$labels = [

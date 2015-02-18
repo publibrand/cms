@@ -5,6 +5,7 @@ class CreateAdmin extends Seeder {
     public function run() {
     	
         Sentry::createUser(array(
+            'first_name' => 'Admin',
             'email'     => 'admin@admin.com',
             'password'  => 'admin',
 	        'activated' => TRUE,

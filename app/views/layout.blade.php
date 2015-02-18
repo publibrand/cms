@@ -32,6 +32,10 @@
     </head>
     <body>
 
+        @if(Sentry::check())
+            @include('partials.menu')
+        @endif
+
         @yield('content')
     
         @foreach ($assets['javascript'] as $asset)
