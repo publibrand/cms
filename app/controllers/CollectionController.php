@@ -4,8 +4,7 @@ class CollectionController extends BaseController {
 
 	public function index() {
 		
-		$collections = Collection::where("id", "!=", 1)
-								 ->get();
+		$collections = Collection::all();
 
 		return View::make('dashboard.Collections.index')
 				   ->with('collections', $collections);
@@ -96,7 +95,7 @@ class CollectionController extends BaseController {
 
 		$collection = Collection::find($id);
 
-		return View::make('dashboard.collections.index')
+		return View::make('dashboard.collections.show')
 				   ->with('collection', $collection);
 
 	}

@@ -26,7 +26,7 @@
 
 	<div class="form-group">
 		{{ Form::label("fields[" . $fieldNumber . "][required]", "Required") }}
-		{{ Form::checkbox("fields[" . $fieldNumber . "][required]", !empty($field->required) ? $field->required : NULL) }}
+		{{ Form::checkbox("fields[" . $fieldNumber . "][required]", 1, !empty($field->required) ? $field->required : NULL) }}
 		<span class="form-message"></span>
 	</div>
 
