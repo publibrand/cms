@@ -7,6 +7,7 @@ class CreatePagesCollection extends Seeder {
         Collection::create(array(
             'name'     => 'Pages',
             'slug'  => 'pages',
+            'is_visible' => 0,
             'max' => -1,
             'fields' => '{"1":{"name":"Content","label":"content","type":"text","value":"","options":""}}',
         ));

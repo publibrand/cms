@@ -8,24 +8,28 @@
 				<li class="drop-down">
 					Pages
 					<ul>
-						@foreach($menu['pages'] as $page)
-							<li>
-								<a href="{{ route('registers.edit', [$page->collection->slug, $page->id]) }}">{{ $page->name }}</a>
-							</li>
-						@endforeach
+						@if(count($menu['pages']) > 0)
+							@foreach($menu['pages'] as $page)
+								<li>
+									<a href="{{ route('registers.edit', [$page->collection->slug, $page->id]) }}">{{ $page->name }}</a>
+								</li>
+							@endforeach
+						@endif
 						<li>
-							<a href="{{ route('registers.create', $page->collection->slug) }}">Add +</a>
+							<a href="{{ route('registers.create', 'pages') }}">Add +</a>
 						</li>
 					</ul>
 				</li>
 				<li class="drop-down">
 					Collections
 					<ul>
-						@foreach($menu['collections'] as $collection)
-							<li>
-								<a href="{{ route('registers', $collection->slug) }}">{{ $collection->name }}</a>
-							</li>
-						@endforeach
+						@if(count($menu['collections']) > 0)
+							@foreach($menu['collections'] as $collection)
+								<li>
+									<a href="{{ route('registers', $collection->slug) }}">{{ $collection->name }}</a>
+								</li>
+							@endforeach
+						@endif
 						<li>
 							<a href="{{ route('collections.create') }}">Add +</a>
 						</li>

@@ -22,11 +22,14 @@ class BaseController extends Controller {
 
 		$menu = [];
 
-		$menu['collections'] = Collection::where('id', '!=', 1)
+		$menu['collections'] = Collection::where('is_visible', '=', 1)
 										 ->get();
-		$menu['pages'] = Register::where('collections_id', '=', 1)
-								 ->get();
 
+		$menu['pages'] = Collection::where('slug', '=', 'pages')
+								   ->first()
+								   ->registers()
+								   ->get();
+								   
 		return $menu;
 
 	}
