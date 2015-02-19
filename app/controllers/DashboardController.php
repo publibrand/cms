@@ -12,7 +12,9 @@ class DashboardController extends BaseController {
 			return array_reverse($activities, TRUE);
 
 		} catch(Illuminate\Filesystem\FileNotFoundException $e) {
+
 			return [];
+			
 		}
 
 	}

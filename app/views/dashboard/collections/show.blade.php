@@ -2,6 +2,8 @@
 
 @section('content')
 	
-	{{ dd(json_decode($collection->fields, true)) }}
+	<div class="container">
+		{{ dd(json_decode($collection->fields, true)) }}
+	</div>
 
 @stop
