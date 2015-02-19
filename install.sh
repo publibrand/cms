@@ -16,4 +16,6 @@ php artisan migrate --env=local
 echo "Seeding database:"
 php artisan db:seed --env=local
 
+rm ./app/storage/logs/activities.log
+
 echo -e "--------------- Installation Complete  ---------------\n"

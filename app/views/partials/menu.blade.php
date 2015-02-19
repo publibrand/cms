@@ -36,7 +36,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="#">Config</a>
+					<a href="{{ route('registers', 'config') }}">Config</a>
 				</li>
 				<li class="drop-down">
 					{{ Sentry::getUser()->first_name }}

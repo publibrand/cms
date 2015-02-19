@@ -25,7 +25,9 @@ class DashboardController extends BaseController {
 
 	public function index() {
 		
-		$collections = Collection::all();
+		$collections = Collection::where('slug', '!=', 'config')
+								 ->get();
+								 
 		$activities = $this->getActivities();
 
 		return View::make('dashboard.index')
