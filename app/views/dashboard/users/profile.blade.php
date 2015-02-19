@@ -2,6 +2,8 @@
 
 @section('content')
 	
-	{{{ $user }}}
+	<div class="container">
+		{{{ $user }}}
+	</div>
 
 @stop

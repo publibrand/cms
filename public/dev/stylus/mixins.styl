@@ -1,0 +1,40 @@
+reponsive($width) {
+
+	@media screen and (max-width: $width) {
+		{block}	
+	}
+
+}
+
+tablet() {
+
+	@media screen and (max-width: $tablet) {
+		{block}	
+	}
+
+}
+
+mobile() {
+
+	@media screen and (max-width: $mobile) {
+		{block}	
+	}
+
+}
+
+center-horizontally($width){
+	width: $width;
+	left: 50%;
+	margin-left: -($width / 2);
+}
+
+center-vertically($absolute = false) {
+	if($absolute) {
+		position: absolute;
+	} else {
+		position: relative;
+	} 
+
+	top: 50%;
+	transform: translateY(-50%);
+}

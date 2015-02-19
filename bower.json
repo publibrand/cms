@@ -16,7 +16,6 @@
   "dependencies": {
     "jquery": "~2.*",
     "jquery-form": "~3.*",
-    "normalize.css": "~3.*",
     "speakingurl": "~0.20.0"
   }
 }

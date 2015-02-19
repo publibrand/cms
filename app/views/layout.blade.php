@@ -8,7 +8,6 @@
             'assets/js/scripts.min.js',
         ],
         'stylesheet' => [
-            'assets/vendor/normalize.css/normalize.css',
             'assets/css/style.min.css',
         ],
     ];
@@ -32,6 +31,10 @@
         <script> var BASEURL = "{{ URL::to('/') }}"; </script>
     </head>
     <body>
+
+        @if(Sentry::check())
+            @include('partials.menu')
+        @endif
 
         @yield('content')
     

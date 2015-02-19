@@ -33,7 +33,7 @@
 	</div>
 	
 	<div class="form-group">
-		{{ Form::button('Add field', ['class' => 'add-field', 'data-field-number' => 2]); }}
+		{{ Form::button('Add field', ['class' => 'add-field', 'data-field-number' => isset($fields) ? count((array) $fields) + 1 : 2]); }}
 	</div>
 
 	<span class="form-status"></span>

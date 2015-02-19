@@ -23,6 +23,12 @@ Route::get('/auth/logout', array(
 	'uses' => 'AuthController@logout',
 ));
 
+Route::get('/auth/lost', array(
+	'as' => 'auth.lost',
+	'before' => 'guest',
+	'uses' => 'AuthController@lost',
+));
+
 /*
 |--------------------------------------------------------------------------
 | Security Routes
@@ -140,6 +146,11 @@ Route::group(array('before' => 'auth'), function() {
 	Route::post('/collections/addField', array(
 		'as' => 'collections.addField',
 		'uses' => 'CollectionController@addField',
+	));
+
+	Route::post('/collections/search', array(
+		'as' => 'collections.search',
+		'uses' => 'CollectionController@search',
 	));
 
 	/*

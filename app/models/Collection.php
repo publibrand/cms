@@ -1,6 +1,6 @@
 <?php
 
-class Collection extends Eloquent {
+class Collection extends BaseModel {
 
 	protected $table = 'collections';
 
@@ -11,5 +11,9 @@ class Collection extends Eloquent {
 		'file' => 'File',
 		'select' => 'Select',
 	];
+
+	public static function boot() {
+		parent::boot();
+    }
 
 }

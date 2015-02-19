@@ -17,7 +17,6 @@ class CollectionController extends BaseController {
 
 	}
 
-
 	private function generateLabelsAndRules() {
 
 		$labels = [
@@ -41,7 +40,7 @@ class CollectionController extends BaseController {
 				}
 
 				if($key !== "value" && ($key !== 'options' || $options !== FALSE)) {
-					$labels[$field . $key] = 'required';
+					$labels[$field . $key] = ucfirst($key);
 					$rules[$field . $key] = 'required';
 				}
 
@@ -157,6 +156,35 @@ class CollectionController extends BaseController {
 		return Response::json([
 			'view' => $view->render(),
         ], 200); 
+
+	}
+
+	public function search() {
+
+		$query = trim(Input::get('query'));
+
+		$collections = Collection::where('name', 'like', $query . '%')
+								 ->get();
+
+	 	if($collections->count() == 0) {
+	 		return Response::json([
+				'view' => View::make('partials.message')
+							  ->with('message', "No result found for '" . $query . "'")
+							  ->render(),
+	        ], 200); 
+	 	}
+
+		$view = "";
+
+		foreach($collections as $collection) {
+			$view.= View::make('dashboard.collection')
+				   		->with('collection', $collection)
+				   		->render();
+		}
+
+		return Response::json([
+			'view' => $view,
+        ], 200);
 
 	}
 

@@ -1,7 +1,9 @@
 @extends('layout')
 
 @section('content')
-	
-	@include('dashboard.collections.form')	
+
+	<div class="container">
+		@include('dashboard.collections.form')	
+	</div>
 
 @stop

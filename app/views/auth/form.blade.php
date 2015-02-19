@@ -12,9 +12,9 @@
 		<span class="form-message"></span>
 	</div>
 
-	<div class="form-group">
+	<div class="form-group form-remember-me">
+		{{ Form::checkbox('rememberMe', 1, NULL, ['id' => 'rememberMe']) }}
 		{{ Form::label('rememberMe', 'Remember me') }}
-		{{ Form::checkbox('rememberMe') }}
 		<span class="form-message"></span>
 	</div>
 
