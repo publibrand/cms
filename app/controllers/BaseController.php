@@ -29,7 +29,6 @@ class BaseController extends Controller {
 								   ->first()
 								   ->registers()
 								   ->get();
-								   
 		return $menu;
 
 	}
