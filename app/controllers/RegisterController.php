@@ -100,13 +100,18 @@ class RegisterController extends BaseController {
 
 	}
 
-	public function edit($id) {
+	public function edit($slug,$id) {
 
 		$register = Register::find($id);
-		$fields = json_decode($register->fields);
-
+		$metadatas = $register->metaData()->get()->toArray();
+		
+		$collection = Collection::where('slug','=',$slug)->first();
+		$fields = json_decode($collection->fields, TRUE);
+		
 		return View::make('dashboard.registers.edit')
 				   ->with('register', $register)
+				   ->with('metadatas', $metadatas)
+				   ->with('collection', $collection)
 				   ->with('fields', $fields);
 	
 	}

@@ -2,6 +2,6 @@
 
 @section('content')
 	
-	@include('dashboard.collections.form')	
+	@include('dashboard.registers.form')
 
 @stop
