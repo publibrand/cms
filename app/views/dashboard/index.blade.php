@@ -20,7 +20,7 @@
 				</div>
 			</div>
 			<div class="dashboard-section">
-				<h2>Newest</h2>
+				<h2>Activities</h2>
 				<div class="dashboard-activities">
 					<ul>
 						@foreach($activities as $activity )

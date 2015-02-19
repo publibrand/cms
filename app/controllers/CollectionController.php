@@ -129,11 +129,11 @@ class CollectionController extends BaseController {
 		$collection->max = $this->formatMax(Input::get('max'));
 		$collection->save();
 
-		// return Response::json([
-		// 	'collection' => $collection,
-		// 	'redirect' => route('collections'),
-		// 	'timeiout' => 1000,
-		// ], 200);
+		return Response::json([
+			'collection' => $collection,
+			'redirect' => route('collections'),
+			'timeiout' => 1000,
+		], 200);
 
 	}
 
