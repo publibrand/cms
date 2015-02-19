@@ -1,5 +1,5 @@
 @if(isset($register))
-	{{ Form::model($register, ['route' => array('registers.update', $register->id), 'method' => 'PUT', 'files' => TRUE, 'class' => 'ajax-form']) }}
+	{{ Form::model($register, ['route' => array('registers.update', $collection->slug , $register->id ), 'method' => 'PUT', 'files' => TRUE, 'class' => 'ajax-form']) }}
 @else
 	{{ Form::open(['route' => ['registers.store',$collection->slug], 'method' => 'POST', 'files' => TRUE, 'class' => 'ajax-form register-form']) }}
 @endif
@@ -13,6 +13,7 @@
 @foreach($fields as $field)
 
 	@include('dashboard.registers.fields.'.$field['type'])
+	{{ Form::hidden('field_type['.$field['label'].']',$field['type']) }}
 
 @endforeach
 

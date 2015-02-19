@@ -50,7 +50,6 @@ class RegisterController extends BaseController {
 	public function store($slug) {
 
 		$labelsAndRules = $this->generateLabelsAndRules();
-		
         $validator = Validator::make(Input::all(), $labelsAndRules['rules'], [], $labelsAndRules['labels']);
 
 		if($validator->fails()) {
@@ -100,13 +99,21 @@ class RegisterController extends BaseController {
 
 	}
 
-	public function edit($slug,$id) {
+	public function edit($slug, $id) {
 
 		$register = Register::find($id);
-		$metadatas = $register->metaData()->get()->toArray();
+		$metadatas_db = $register->metaData()->get()->toArray();
 		
-		$collection = Collection::where('slug','=',$slug)->first();
+		foreach($metadatas_db as $metadata){
+			$metadatas[$metadata['key']]=$metadata['value'];
+		}
+		
+		$collection = Collection::where('slug', '=', $slug)->first();
 		$fields = json_decode($collection->fields, TRUE);
+		
+		if($collection->id != $register->collections_id){
+			die('ERROR'); // TO DO
+		}
 		
 		return View::make('dashboard.registers.edit')
 				   ->with('register', $register)
@@ -116,8 +123,46 @@ class RegisterController extends BaseController {
 	
 	}
 
-	public function update($id) {
+	public function update($slug, $id) {
 
+		$labelsAndRules = $this->generateLabelsAndRules();
+		$validator = Validator::make(Input::all(), $labelsAndRules['rules'], [], $labelsAndRules['labels']);
+		
+		if($validator->fails()) {
+			return Response::json([
+				'errors' => $validator->getMessageBag()->toArray(),
+            ], 400); 
+		}
+		
+		$register = Register::find($id);
+		$register->name = Input::get('name');
+		$register->collections_id = Input::get('collections_id');
+		
+		$register->save();
+		
+		$fields = Input::all();
+		$fields = $fields['fields'];
+		
+		foreach($fields as $key => $value) {
+			if(Input::hasFile('fields.'.$key)) {
+				$value= $this->saveFile(Input::file('fields.'.$key));
+			}else if(Input::get('field_type.'.$key)=='file') {
+				$value = MetaData::where('key', '=', $key)->first()->value;
+			}
+			
+			
+			$metaData = MetaData::where('key', '=', $key)->first();
+			$metaData->value = $value;
+			$metaData->save();
+		}
+		
+		
+		return Response::json([
+			'register' => $register,
+			'redirect' => route('registers', $slug),
+			'timeiout' => 1000,
+		], 200);
+		
 
 	}
 
