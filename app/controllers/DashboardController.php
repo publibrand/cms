@@ -4,15 +4,19 @@ class DashboardController extends BaseController {
 
 	private function getActivities() {
 
+		$log = storage_path() .'/logs/activities.log';
+
 		try {
 
-			$activities = file(storage_path() .'/logs/activities.log');
+			$activities = file($log);
 			$activities = array_map('json_decode', $activities);
 
 			return array_reverse($activities, TRUE);
 
-		} catch(Illuminate\Filesystem\FileNotFoundException $e) {
+		} catch(ErrorException $e) {
 
+			File::put($log, '');
+			
 			return [];
 			
 		}
