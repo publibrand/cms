@@ -22,13 +22,17 @@
 			<div class="dashboard-section">
 				<h2>Activities</h2>
 				<div class="dashboard-activities">
-					<ul>
-						@foreach($activities as $activity )
-							<li>
-								 <strong>{{ $activity->user->first_name }}</strong> {{ $activity->action }} <strong>{{ $activity->entity->name }}</strong> at {{ date('d M, H:i ', $activity->date) }}.
-							</li>
-						@endforeach
-					</ul>
+					@if(count($activities) > 0)
+						<ul>
+							@foreach($activities as $activity )
+								<li>
+									 <strong>{{ $activity->user->first_name }}</strong> {{ $activity->action }} <strong>{{ $activity->entity->name }}</strong> at {{ date('d M, H:i ', $activity->date) }}.
+								</li>
+							@endforeach
+						</ul>
+					@else
+						<p>There is no activities yet.</p>
+					@endif
 				</div>
 			</div>
 		</div>

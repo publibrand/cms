@@ -1,6 +1,6 @@
 <?php
 
-class Register extends Eloquent {
+class Register extends BaseModel {
 
 	protected $table = 'registers';
 	
@@ -11,5 +11,11 @@ class Register extends Eloquent {
 		return $this->hasMany('MetaData', 'registers_id', 'id');
 		
 	}
-	
+
+	public function collection() {
+
+		return $this->belongsTo('Collection', 'id');
+
+	}
+
 }
