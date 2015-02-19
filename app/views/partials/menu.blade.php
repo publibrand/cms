@@ -1,7 +1,9 @@
 <header class="header">
 	<div class="container">
 		<nav class="menu">
-			<h1>Title</h1>
+			<a href="{{ url('/') }}">
+				<h1>Title</h1>
+			</a>
 			<ul>
 				<li class="drop-down">
 					Pages
@@ -18,6 +20,9 @@
 						<li>
 							<a href="#">Page 4</a>
 						</li>
+						<li>
+							<a href="#">Add +</a>
+						</li>
 					</ul>
 				</li>
 				<li class="drop-down">
@@ -28,6 +33,9 @@
 							<a href="#">{{ $collection->name }}</a>
 						</li>
 						@endforeach
+						<li>
+							<a href="{{ route('collections.create') }}">Add +</a>
+						</li>
 					</ul>
 				</li>
 				<li>

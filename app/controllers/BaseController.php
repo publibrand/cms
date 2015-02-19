@@ -13,7 +13,8 @@ class BaseController extends Controller {
 
 		$menu = [];
 
-		$menu['collections'] = Collection::all();
+		$menu['collections'] = Collection::where('id', '!=', 1)
+										 ->get();
 
 		return $menu;
 

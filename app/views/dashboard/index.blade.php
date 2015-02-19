@@ -23,48 +23,11 @@
 				<h2>Newest</h2>
 				<div class="dashboard-activities">
 					<ul>
-						<li>
-							<div class="activity-info">
-								<span class="activity-date">7 jan, 01:25</span>
-								<span class="activity-action">created</span>
-							</div>
-							<span class="activity">Lorem ipsum dolem atives a lards</span>
-						</li>
-						<li>
-							<div class="activity-info">
-								<span class="activity-date">7 jan, 01:25</span>
-								<span class="activity-action">edit</span>
-							</div>
-							<span class="activity">Lorem ipsum dolem atives a lards</span>
-						</li>
-						<li>
-							<div class="activity-info">
-								<span class="activity-date">7 jan, 01:25</span>
-								<span class="activity-action">remove</span>
-							</div>
-							<span class="activity">Lorem ipsum dolem atives a lards</span>
-						</li>
-						<li>
-							<div class="activity-info">
-								<span class="activity-date">7 jan, 01:25</span>
-								<span class="activity-action">created</span>
-							</div>
-							<span class="activity">Lorem ipsum dolem atives a lards</span>
-						</li>
-						<li>
-							<div class="activity-info">
-								<span class="activity-date">7 jan, 01:25</span>
-								<span class="activity-action">remove</span>
-							</div>
-							<span class="activity">Lorem ipsum dolem atives a lards</span>
-						</li>
-						<li>
-							<div class="activity-info">
-								<span class="activity-date">7 jan, 01:25</span>
-								<span class="activity-action">edit</span>
-							</div>
-							<span class="activity">Lorem ipsum dolem atives a lards</span>
-						</li>
+						@foreach($activities as $activity )
+							<li>
+								 <strong>{{ $activity->user->first_name }}</strong> {{ $activity->action }} <strong>{{ $activity->entity->name }}</strong> at {{ date('d M, H:i ', $activity->date) }}.
+							</li>
+						@endforeach
 					</ul>
 				</div>
 			</div>

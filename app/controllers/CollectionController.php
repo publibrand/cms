@@ -40,7 +40,7 @@ class CollectionController extends BaseController {
 				}
 
 				if($key !== "value" && ($key !== 'options' || $options !== FALSE)) {
-					$labels[$field . $key] = 'required';
+					$labels[$field . $key] = ucfirst($key);
 					$rules[$field . $key] = 'required';
 				}
 
@@ -129,11 +129,11 @@ class CollectionController extends BaseController {
 		$collection->max = $this->formatMax(Input::get('max'));
 		$collection->save();
 
-		return Response::json([
-			'collection' => $collection,
-			'redirect' => route('collections'),
-			'timeiout' => 1000,
-		], 200);
+		// return Response::json([
+		// 	'collection' => $collection,
+		// 	'redirect' => route('collections'),
+		// 	'timeiout' => 1000,
+		// ], 200);
 
 	}
 
