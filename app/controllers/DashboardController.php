@@ -4,7 +4,10 @@ class DashboardController extends BaseController {
 
 	public function index() {
 		
-		return View::make('dashboard.index');
+		$collections = Collection::all();
+
+		return View::make('dashboard.index')
+				   ->with('collections', $collections);
 
 	}
 

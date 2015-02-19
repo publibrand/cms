@@ -23,18 +23,11 @@
 				<li class="drop-down">
 					Collections
 					<ul>
+						@foreach($menu['collections'] as $collection)
 						<li>
-							<a href="#">Collection 1</a>
+							<a href="#">{{ $collection->name }}</a>
 						</li>
-						<li>
-							<a href="#">Collection 2</a>
-						</li>
-						<li>
-							<a href="#">Collection 3</a>
-						</li>
-						<li>
-							<a href="#">Collection 4</a>
-						</li>
+						@endforeach
 					</ul>
 				</li>
 				<li>
@@ -44,10 +37,10 @@
 					{{ Sentry::getUser()->first_name }}
 					<ul>
 						<li>
-							<a href="#">Profile</a>
+							<a href="{{ route('users.profile') }}">Profile</a>
 						</li>
 						<li>
-							<a href="#">Logout </a>
+							<a href="{{ route('auth.logout') }}">Logout </a>
 						</li>
 					</ul>
 				</li>

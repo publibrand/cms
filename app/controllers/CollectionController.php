@@ -159,4 +159,33 @@ class CollectionController extends BaseController {
 
 	}
 
+	public function search() {
+
+		$query = trim(Input::get('query'));
+
+		$collections = Collection::where('name', 'like', $query . '%')
+								 ->get();
+
+	 	if($collections->count() == 0) {
+	 		return Response::json([
+				'view' => View::make('partials.message')
+							  ->with('message', "No result found for '" . $query . "'")
+							  ->render(),
+	        ], 200); 
+	 	}
+
+		$view = "";
+
+		foreach($collections as $collection) {
+			$view.= View::make('dashboard.collection')
+				   		->with('collection', $collection)
+				   		->render();
+		}
+
+		return Response::json([
+			'view' => $view,
+        ], 200);
+
+	}
+
 }

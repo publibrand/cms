@@ -148,5 +148,10 @@ Route::group(array('before' => 'auth'), function() {
 		'uses' => 'CollectionController@addField',
 	));
 
+	Route::post('/collections/search', array(
+		'as' => 'collections.search',
+		'uses' => 'CollectionController@search',
+	));
+
 });
 

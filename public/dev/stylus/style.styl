@@ -74,6 +74,7 @@
 					margin-top: 10px;
 					box-shadow:0 1px 2px #aaa;
 					left: -20px;
+					width: 140px;
 					li {
 						padding: 0 !important;
 						margin: 0;
@@ -93,6 +94,7 @@
 					ul {
 						left: auto;
 						right: 0;
+						width: auto;
 					}
 				}
 				&:hover {
@@ -137,6 +139,7 @@
 		margin-top: 30px;
 		width: 100%;
 		.dashboard-collection{
+			position: relative;
 			width: 31%;
 			height: 200px;
 			box-shadow:0 1px 2px #aaa;
@@ -145,6 +148,19 @@
 			margin-bottom: 25px;
 			&:nth-child(3n){
 				margin-right: 0;
+			}
+			.collection-info{
+				text-align: center;
+				center-vertically();
+				.collection-total-registers{
+					font-size: 50px;
+					font-weight: bold;
+					float: left;
+					width: 100%;	
+				}
+				.collection-name{
+
+				}
 			}
 			+tablet() {
 				width: 47%;

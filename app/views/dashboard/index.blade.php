@@ -1,28 +1,22 @@
 @extends('layout')
 
 @section('content')
-		
+
 	<div class="dashboard">
 		<div class="container">
 			<div class="dashboard-section">
 				<h2>Collections</h2>
-				{{ Form::open(['route' => 'auth.check', 'method' => 'POST', 'class' => 'search-form']) }}
+				{{ Form::open(['route' => 'collections.search', 'method' => 'POST', 'class' => 'search-form']) }}
 					
-					{{ Form::text('search') }}
+					{{ Form::text('query') }}
 
 					{{ Form::submit('Save'); }}
 
 				{{ Form::close() }}
 				<div class="dashboard-collections">
-					<div class="dashboard-collection">
-						
-					</div>
-					<div class="dashboard-collection">
-						
-					</div>
-					<div class="dashboard-collection">
-						
-					</div>
+					@foreach($collections as $collection)
+						@include('dashboard.collection')
+					@endforeach
 				</div>
 			</div>
 			<div class="dashboard-section">

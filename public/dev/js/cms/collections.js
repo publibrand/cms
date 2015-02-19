@@ -19,6 +19,20 @@ var Collections = (function() {
 
     }
 
+    _public.search = function(query) {
+
+        $.post(BASEURL + "/collections/search", {
+            query: query,
+        }).done(function(data) {
+            $collections = $('.dashboard-collections');
+            $collections.children()
+                        .remove()
+                        .end()
+                        .append(data.view);
+        });
+
+    }
+
     return _public;
 
 }());
@@ -66,5 +80,19 @@ $('form.collection-form').on('change', 'select', function () {
         $options.find('input')
                 .val('');
     }
+
+});
+
+$('form.search-form').on('submit', function (event) {
+    
+    event.preventDefault();
+
+    Collections.search($(this).val());
+
+});
+
+$('form.search-form').on('keyup', "input[name='query']", function () {
+    
+    Collections.search($(this).val());
 
 });
