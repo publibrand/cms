@@ -142,5 +142,49 @@ Route::group(array('before' => 'auth'), function() {
 		'uses' => 'CollectionController@addField',
 	));
 
+	/*
+	|--------------------------------------------------------------------------
+	| Registers Routes
+	|--------------------------------------------------------------------------
+	*/
+
+	Route::get('/registers/{collection}', array(
+		'as' => 'registers',
+		'uses' => 'RegisterController@index',
+	));
+
+	Route::get('/registers/{collection}/create', array(
+		'as' => 'registers.create',
+		'uses' => 'RegisterController@create',
+	));
+
+	Route::post('/registers/{collection}', array(
+		'as' => 'registers.store',
+		'before' => 'csrf',
+		'uses' => 'RegisterController@store',
+	));
+
+	Route::get('/registers/{collection}/{register}', array(
+		'as' => 'registers.show',
+		'uses' => 'RegisterController@show',
+	));
+
+	Route::get('/registers/{collection}/{register}/edit', array(
+		'as' => 'registers.edit',
+		'uses' => 'RegisterController@edit',
+	));
+
+	Route::put('/registers/{collection}/{register}', array(
+		'as' => 'registers.update',
+		'before' => 'csrf',
+		'uses' => 'RegisterController@update',
+	));
+
+	Route::delete('/registers/{collection}/{register}', array(
+		'as' => 'registers.destroy',
+		'before' => 'csrf',
+		'uses' => 'RegisterController@destroy',
+	));
+
 });
 
