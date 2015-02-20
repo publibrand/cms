@@ -92,14 +92,11 @@ class CollectionController extends BaseController {
 
 
 	public function show($id){
+		
 		try{
-
 			$collection = Collection::findOrFail($id);
-								   
-		} catch(Exception $e) {
-
+		} catch(Illuminate\Database\Eloquent\ModelNotFoundException $e) {
 			return Redirect::to('/');
-
 		}
 
 		return View::make('dashboard.collections.show')
@@ -110,13 +107,9 @@ class CollectionController extends BaseController {
 	public function edit($id) {
 
 		try{
-
 			$collection = Collection::findOrFail($id);
-								   
-		} catch(Exception $e) {
-
+		} catch(Illuminate\Database\Eloquent\ModelNotFoundException $e) {
 			return Redirect::to('/');
-			
 		}
 		
 		$fields = json_decode($collection->fields);
@@ -181,6 +174,7 @@ class CollectionController extends BaseController {
 		$query = trim(Input::get('query'));
 
 		$collections = Collection::where('name', 'like', $query . '%')
+								 ->where('slug', '!=', 'config')
 								 ->get();
 
 	 	if($collections->count() == 0) {

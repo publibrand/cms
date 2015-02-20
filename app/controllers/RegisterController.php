@@ -4,15 +4,11 @@ class RegisterController extends BaseController {
 
 	public function index($slug) {
 
-		try {
-
-			$collection = Collection::where('slug','=',$slug)
+		try{
+			$collection = Collection::where('slug','=', $slug)
 									->firstOrFail();
-
-		} catch(Exception $e) {
-
+		} catch(Illuminate\Database\Eloquent\ModelNotFoundException $e) {
 			return Redirect::to('/');
-
 		}
 
 		$registers = $collection->registers();
@@ -37,8 +33,12 @@ class RegisterController extends BaseController {
 
 	public function create($slug) {
 		
-		$collection = Collection::where('slug', '=', $slug)
-								->first();
+		try{
+			$collection = Collection::where('slug','=', $slug)
+									->firstOrFail();
+		} catch(Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+			return Redirect::to('/');
+		}
 		
 		if($collection->max == 1 && $collection->registers()->count() == 1) {
 			$register = $collection->registers()->first();
@@ -158,14 +158,13 @@ class RegisterController extends BaseController {
 	public function show($slug, $id){
 
 		try{
-
-			$collection = Collection::where('slug','=',$slug)
+			$collection = Collection::where('slug','=', $slug)
 									->firstOrFail();
 
 			$register = $collection->registers()
 								   ->findOrFail($id);
-								   
-		} catch(Exception $e) {
+
+		} catch(Illuminate\Database\Eloquent\ModelNotFoundException $e) {
 			return Redirect::to('/');
 		}
 
@@ -192,12 +191,13 @@ class RegisterController extends BaseController {
 
 	public function edit($slug, $id) {
 
-		$collection = Collection::where('slug', '=', $slug)
-							    ->first();
 		try{
+			$collection = Collection::where('slug', '=', $slug)
+								    ->firstOrFail();
+								    
 			$register = $collection->registers()
 								   ->findOrFail($id);
-		} catch(Exception $e) {
+		} catch(Illuminate\Database\Eloquent\ModelNotFoundException $e) {
 			return Redirect::to('/');
 		}
 
