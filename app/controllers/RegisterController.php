@@ -3,16 +3,22 @@
 class RegisterController extends BaseController {
 
 	public function index($slug) {
-		$collection = Collection::where('slug','=',$slug)->first();
-		$registers = Register::where('collections_id','=',$collection->id)->get();
-		
-		return View::make('dashboard.Registers.index')
-					->with('registers', $registers);
+
+		$collection = Collection::where('slug','=',$slug)
+								->first();
+
+		$registers = $collection->registers()
+								->get();
+
+		return View::make('dashboard.registers.index')
+				   ->with('registers', $registers);
+
 	}
 
 	public function create($slug) {
 		
-		$collection = Collection::where('slug','=',$slug)->first();
+		$collection = Collection::where('slug', '=', $slug)
+								->first();
 		
 		$fields = json_decode($collection->fields, TRUE);
 		
@@ -22,7 +28,7 @@ class RegisterController extends BaseController {
 
 	}
 	
-	private function generateLabelsAndRules(){
+	private function generateLabelsAndRules($store = TRUE){
 		
 		$labels = [
 			'name' => 'Name',
@@ -34,10 +40,14 @@ class RegisterController extends BaseController {
 
 		$collection = Collection::find(Input::get('collections_id'));
 		$fields = json_decode($collection->fields, TRUE);
+
 		foreach($fields AS $field){
-			if(!empty($field['required']) ){
-				$labels['fields.'.$field['label']] = $field['label'];
-				$rules['fields.'.$field['label']] = 'required';
+			if(!empty($field['required'])) {
+				if(Input::get('field_type.' . $field['label']) == 'file' && $store === FALSE) {
+					continue;
+				}
+				$labels['fields.' . $field['label']] = $field['label'];
+				$rules['fields.' . $field['label']] = 'required';
 			}
 		}
 		
@@ -47,6 +57,47 @@ class RegisterController extends BaseController {
 		];
 	}
 	
+
+	private function saveMetaData($register, $store = TRUE) {
+
+		$fields = Input::all();
+		$fields = $fields['fields'];
+		
+		foreach($fields as $key => $value) {
+			if(Input::hasFile('fields.' . $key)) {
+
+				$value = $this->saveFile(Input::file('fields.' . $key));
+
+			} else if(Input::get('field_type.' . $key) == 'file') {
+				
+				$value = MetaData::where('key', '=', $key)
+								 ->first()
+								 ->value;
+			}
+			
+			if($store) {
+				$metaData = new MetaData;
+				$metaData->registers_id = $register->id;
+			} else {
+				$metaData = MetaData::where('key', '=', $key)
+									->first();
+			}
+
+			$metaData->key = $key;
+			$metaData->value = $value;
+			$metaData->save();
+		}
+
+	}
+
+	private function storeMetaData($register) {
+		$this->saveMetaData($register);
+	}
+
+	private function updateMetaData($register) {
+		$this->saveMetaData($register, FALSE);
+	}
+
 	public function store($slug) {
 
 		$labelsAndRules = $this->generateLabelsAndRules();
@@ -61,25 +112,9 @@ class RegisterController extends BaseController {
 		$register = new Register;
 		$register->name = Input::get('name');
 		$register->collections_id = Input::get('collections_id');
-		
 		$register->save();
 		
-		$fields = Input::all();
-		$fields = $fields['fields'];
-		
-		foreach($fields as $key => $value) {
-			if(Input::hasFile('fields.'.$key)) {
-				$value= $this->saveFile(Input::file('fields.'.$key));
-			}
-			
-			$metaData = new MetaData;
-			$metaData->registers_id = $register->id;
-			$metaData->key = $key;
-			$metaData->value = $value;
-			$metaData->save();
-		}
-		
-		
+		$this->storeMetaData($register);
 		
 		return Response::json([
 			'register' => $register,
@@ -90,34 +125,58 @@ class RegisterController extends BaseController {
 	}
 	
 	
-	public function show($id){
+	public function show($slug, $id){
 
-		$register = Register::find($id);
+		$collection = Collection::where('slug','=',$slug)
+								->first();
 
-		return View::make('dashboard.registers.index')
+		try{
+			$register = $collection->registers()
+								   ->findOrFail($id);
+		} catch(Exception $e) {
+			return Redirect::to('/');
+		}
+
+
+		return View::make('dashboard.registers.show')
 				   ->with('register', $register);
+
+	}
+
+	private function formatMetaData($metaData) {
+
+		$meta = [];
+
+		foreach($metaData as $values){
+			$meta[$values['key']] = $values['value'];
+		}
+
+		return $meta;
 
 	}
 
 	public function edit($slug, $id) {
 
-		$register = Register::find($id);
-		$metadatas_db = $register->metaData()->get()->toArray();
-		
-		foreach($metadatas_db as $metadata){
-			$metadatas[$metadata['key']]=$metadata['value'];
+		$collection = Collection::where('slug', '=', $slug)
+							    ->first();
+		try{
+			$register = $collection->registers()
+								   ->findOrFail($id);
+		} catch(Exception $e) {
+			return Redirect::to('/');
 		}
+
+		$metaData = $register->metaData()
+							 ->get()
+							 ->toArray();
+
+		$metaData = $this->formatMetaData($metaData);
 		
-		$collection = Collection::where('slug', '=', $slug)->first();
 		$fields = json_decode($collection->fields, TRUE);
-		
-		if($collection->id != $register->collections_id){
-			die('ERROR'); // TO DO
-		}
 		
 		return View::make('dashboard.registers.edit')
 				   ->with('register', $register)
-				   ->with('metadatas', $metadatas)
+				   ->with('metadatas', $metaData)
 				   ->with('collection', $collection)
 				   ->with('fields', $fields);
 	
@@ -125,7 +184,7 @@ class RegisterController extends BaseController {
 
 	public function update($slug, $id) {
 
-		$labelsAndRules = $this->generateLabelsAndRules();
+		$labelsAndRules = $this->generateLabelsAndRules(FALSE);
 		$validator = Validator::make(Input::all(), $labelsAndRules['rules'], [], $labelsAndRules['labels']);
 		
 		if($validator->fails()) {
@@ -137,25 +196,9 @@ class RegisterController extends BaseController {
 		$register = Register::find($id);
 		$register->name = Input::get('name');
 		$register->collections_id = Input::get('collections_id');
-		
 		$register->save();
 		
-		$fields = Input::all();
-		$fields = $fields['fields'];
-		
-		foreach($fields as $key => $value) {
-			if(Input::hasFile('fields.'.$key)) {
-				$value= $this->saveFile(Input::file('fields.'.$key));
-			}else if(Input::get('field_type.'.$key)=='file') {
-				$value = MetaData::where('key', '=', $key)->first()->value;
-			}
-			
-			
-			$metaData = MetaData::where('key', '=', $key)->first();
-			$metaData->value = $value;
-			$metaData->save();
-		}
-		
+		$this->updateMetaData($register);
 		
 		return Response::json([
 			'register' => $register,
@@ -173,17 +216,6 @@ class RegisterController extends BaseController {
 
 		return Response::json([
 			'redirect' => route('registers'),
-        ], 200); 
-
-	}
-
-	public function addField() {
-
-		$view = View::make('dashboard.registers.field')
-				    ->with('fieldNumber', Input::get('fieldNumber'));
-
-		return Response::json([
-			'view' => $view->render(),
         ], 200); 
 
 	}

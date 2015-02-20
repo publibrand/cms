@@ -11,7 +11,7 @@
 						@if(count($menu['pages']) > 0)
 							@foreach($menu['pages'] as $page)
 								<li>
-									<a href="{{ route('registers.edit', [$page->collection->slug, $page->id]) }}">{{ $page->name }}</a>
+									<a href="{{ route('registers.edit', ['pages', $page->id]) }}">{{ $page->name }}</a>
 								</li>
 							@endforeach
 						@endif
