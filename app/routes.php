@@ -26,10 +26,28 @@ Route::get('/auth/logout', array(
 	'uses' => 'AuthController@logout',
 ));
 
-Route::get('/auth/lost', array(
-	'as' => 'auth.lost',
+Route::get('/auth/forgot', array(
+	'as' => 'auth.forgot',
 	'before' => 'guest',
-	'uses' => 'AuthController@lost',
+	'uses' => 'AuthController@forgot',
+));
+
+Route::post('/auth/forgot/send', array(
+	'as' => 'auth.forgot.send',
+	'before' => 'guest',
+	'uses' => 'AuthController@forgotSend',
+));
+
+Route::get('/auth/change/{token}', array(
+	'as' => 'auth.forgot.change',
+	'before' => 'guest',
+	'uses' => 'AuthController@changePassword',
+));
+
+Route::post('/auth/forgot/{token}', array(
+	'as' => 'auth.forgot.check',
+	'before' => 'guest',
+	'uses' => 'AuthController@forgotCheck',
 ));
 
 /*

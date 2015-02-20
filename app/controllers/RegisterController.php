@@ -80,7 +80,7 @@ class RegisterController extends BaseController {
 					continue;
 				}
 
-				$labels['fields.' . $field['label']] = $field['label'];
+				$labels['fields.' . $field['label']] = $field['name'];
 				$rules['fields.' . $field['label']] = 'required';
 
 			}
