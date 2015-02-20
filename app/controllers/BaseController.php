@@ -2,13 +2,6 @@
 
 class BaseController extends Controller {
 
-
-	public function __construct() {
-
-		
-
-	}
-	
 	protected function saveFile($file, $dir = 'uploads'){
 		$destinationPath = public_path() . '/' . $dir . "/";
 		$fileName = Str::random(140) .'.'. $file->getClientOriginalExtension();

@@ -87,8 +87,8 @@ class RegisterController extends BaseController {
 		}
 		
 		return [
-			'labels'=>$labels,
-			'rules'=>$rules
+			'labels' => $labels,
+			'rules' => $rules
 		];
 	}
 	
