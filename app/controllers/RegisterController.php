@@ -14,6 +14,7 @@ class RegisterController extends BaseController {
 		$registers = $collection->registers();
 								
 		if($collection->max == 1) {
+
 			if($registers->count() == 0) {
 				return Redirect::route('registers.create', $slug);
 			}
@@ -41,6 +42,7 @@ class RegisterController extends BaseController {
 		}
 		
 		if($collection->max == 1 && $collection->registers()->count() == 1) {
+
 			$register = $collection->registers()->first();
 
 			return Redirect::route('registers.edit', [
@@ -73,11 +75,14 @@ class RegisterController extends BaseController {
 
 		foreach($fields AS $field){
 			if(!empty($field['required'])) {
+
 				if(Input::get('field_type.' . $field['label']) == 'file' && $store === FALSE) {
 					continue;
 				}
+
 				$labels['fields.' . $field['label']] = $field['label'];
 				$rules['fields.' . $field['label']] = 'required';
+
 			}
 		}
 		
@@ -98,19 +103,24 @@ class RegisterController extends BaseController {
 
 				$value = $this->saveFile(Input::file('fields.' . $key));
 
-			} else if(Input::get('field_type.' . $key) == 'file') {
+			} elseif(Input::get('field_type.' . $key) == 'file') {
 				
 				$value = MetaData::where('key', '=', $key)
 								 ->first()
 								 ->value;
+
 			}
 			
 			if($store) {
+
 				$metaData = new MetaData;
 				$metaData->registers_id = $register->id;
+
 			} else {
+
 				$metaData = MetaData::where('key', '=', $key)
 									->first();
+
 			}
 
 			$metaData->key = $key;
@@ -121,11 +131,15 @@ class RegisterController extends BaseController {
 	}
 
 	private function storeMetaData($register) {
+
 		$this->saveMetaData($register);
+
 	}
 
 	private function updateMetaData($register) {
+
 		$this->saveMetaData($register, FALSE);
+
 	}
 
 	public function store($slug) {
@@ -134,9 +148,11 @@ class RegisterController extends BaseController {
         $validator = Validator::make(Input::all(), $labelsAndRules['rules'], [], $labelsAndRules['labels']);
 
 		if($validator->fails()) {
+
 			return Response::json([
 				'errors' => $validator->getMessageBag()->toArray(),
             ], 400); 
+
 		}
 		
 		$register = new Register;
@@ -182,7 +198,9 @@ class RegisterController extends BaseController {
 		$meta = [];
 
 		foreach($metaData as $values){
+
 			$meta[$values['key']] = $values['value'];
+
 		}
 
 		return $meta;
@@ -194,7 +212,7 @@ class RegisterController extends BaseController {
 		try{
 			$collection = Collection::where('slug', '=', $slug)
 								    ->firstOrFail();
-								    
+
 			$register = $collection->registers()
 								   ->findOrFail($id);
 		} catch(Illuminate\Database\Eloquent\ModelNotFoundException $e) {
@@ -223,9 +241,11 @@ class RegisterController extends BaseController {
 		$validator = Validator::make(Input::all(), $labelsAndRules['rules'], [], $labelsAndRules['labels']);
 		
 		if($validator->fails()) {
+
 			return Response::json([
 				'errors' => $validator->getMessageBag()->toArray(),
-            ], 400); 
+            ], 400);
+             
 		}
 		
 		$register = Register::find($id);
