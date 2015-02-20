@@ -30,7 +30,7 @@
 
         <script> var BASEURL = "{{ URL::to('/') }}"; </script>
     </head>
-    <body>
+    <body class="{{ $pageClass or '' }}">
 
         @if(Sentry::check())
             @include('partials.menu')
