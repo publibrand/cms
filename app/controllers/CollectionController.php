@@ -92,8 +92,15 @@ class CollectionController extends BaseController {
 
 
 	public function show($id){
+		try{
 
-		$collection = Collection::find($id);
+			$collection = Collection::findOrFail($id);
+								   
+		} catch(Exception $e) {
+
+			return Redirect::to('/');
+
+		}
 
 		return View::make('dashboard.collections.show')
 				   ->with('collection', $collection);
@@ -102,7 +109,16 @@ class CollectionController extends BaseController {
 
 	public function edit($id) {
 
-		$collection = Collection::find($id);
+		try{
+
+			$collection = Collection::findOrFail($id);
+								   
+		} catch(Exception $e) {
+
+			return Redirect::to('/');
+			
+		}
+		
 		$fields = json_decode($collection->fields);
 
 		return View::make('dashboard.collections.edit')

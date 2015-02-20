@@ -12,12 +12,18 @@
 */
 
 App::before(function($request) {
-	//
+
+	View::share('menu', BaseController::getMenuItems());
+
 });
 
 
 App::after(function($request, $response) {
 	//
+});
+
+App::missing(function($exception) {
+	return Response::view('errors.missing', array(), 404);
 });
 
 /*

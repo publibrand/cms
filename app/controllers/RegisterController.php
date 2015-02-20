@@ -4,14 +4,34 @@ class RegisterController extends BaseController {
 
 	public function index($slug) {
 
-		$collection = Collection::where('slug','=',$slug)
-								->first();
+		try {
 
-		$registers = $collection->registers()
-								->get();
+			$collection = Collection::where('slug','=',$slug)
+									->firstOrFail();
+
+		} catch(Exception $e) {
+
+			return Redirect::to('/');
+
+		}
+
+		$registers = $collection->registers();
+								
+		if($collection->max == 1) {
+			if($registers->count() == 0) {
+				return Redirect::route('registers.create', $slug);
+			}
+
+			return Redirect::route('registers.show', [
+				$slug,
+				$registers->first()
+						  ->id,
+			]);
+
+		}
 
 		return View::make('dashboard.registers.index')
-				   ->with('registers', $registers);
+				   ->with('registers', $registers->get());
 
 	}
 
@@ -20,6 +40,16 @@ class RegisterController extends BaseController {
 		$collection = Collection::where('slug', '=', $slug)
 								->first();
 		
+		if($collection->max == 1 && $collection->registers()->count() == 1) {
+			$register = $collection->registers()->first();
+
+			return Redirect::route('registers.edit', [
+				$slug,
+				$register->id
+			]);
+
+		}
+
 		$fields = json_decode($collection->fields, TRUE);
 		
 		return View::make('dashboard.registers.create')
@@ -127,18 +157,23 @@ class RegisterController extends BaseController {
 	
 	public function show($slug, $id){
 
-		$collection = Collection::where('slug','=',$slug)
-								->first();
-
 		try{
+
+			$collection = Collection::where('slug','=',$slug)
+									->firstOrFail();
+
 			$register = $collection->registers()
 								   ->findOrFail($id);
+								   
 		} catch(Exception $e) {
 			return Redirect::to('/');
 		}
 
+		$metaData = $register->metaData()
+							 ->get();
 
 		return View::make('dashboard.registers.show')
+				   ->with('metaData', $metaData)
 				   ->with('register', $register);
 
 	}

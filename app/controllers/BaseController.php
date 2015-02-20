@@ -5,7 +5,7 @@ class BaseController extends Controller {
 
 	public function __construct() {
 
-		View::share('menu', $this->getMenuItems());
+		
 
 	}
 	
@@ -18,7 +18,7 @@ class BaseController extends Controller {
 		return $dir . "/" . $fileName;
 	}
 
-	private function getMenuItems() {
+	public static function getMenuItems() {
 
 		$menu = [];
 

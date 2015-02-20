@@ -8,7 +8,7 @@ class CreatePagesCollection extends Seeder {
             'name'     => 'Pages',
             'slug'  => 'pages',
             'is_visible' => 0,
-            'max' => 1,
+            'max' => -1,
             'fields' => '{"1":{"name":"Content","label":"content","type":"text","value":"","options":""}}',
         ));
 
