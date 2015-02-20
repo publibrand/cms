@@ -3,7 +3,7 @@
 @section('content')
 	
 	<div class="container">
-		{{ dd(json_decode($collection->fields, true)) }}
+		{{ $collection->fields }}
 	</div>
 
 @stop

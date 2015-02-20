@@ -1,5 +1,8 @@
 <?php
 
+Route::pattern('id', '[0-9]+');
+Route::pattern('slug', '[a-z0-9-]+');
+
 /*
 |--------------------------------------------------------------------------
 | Auth Routes
@@ -64,24 +67,24 @@ Route::group(array('before' => 'auth'), function() {
 		'uses' => 'UserController@store',
 	));
 
-	Route::get('/users/{user}', array(
+	Route::get('/users/{id}', array(
 		'as' => 'users.show',
 		'uses' => 'UserController@show',
 	));
 
-	Route::get('/users/{user}/edit', array(
+	Route::get('/users/{id}/edit', array(
 		'as' => 'users.edit',
 		'before' => 'auth.isUser',
 		'uses' => 'UserController@edit',
 	));
 
-	Route::put('/users/{user}', array(
+	Route::put('/users/{id}', array(
 		'as' => 'users.update',
 		'before' => 'csrf',
 		'uses' => 'UserController@update',
 	));
 
-	Route::delete('/users/{user}', array(
+	Route::delete('/users/{id}', array(
 		'as' => 'users.destroy',
 		'before' => 'csrf',
 		'uses' => 'UserController@destroy',
@@ -121,23 +124,23 @@ Route::group(array('before' => 'auth'), function() {
 		'uses' => 'CollectionController@store',
 	));
 
-	Route::get('/collections/{collection}', array(
+	Route::get('/collections/{id}', array(
 		'as' => 'collections.show',
 		'uses' => 'CollectionController@show',
 	));
 
-	Route::get('/collections/{collection}/edit', array(
+	Route::get('/collections/{id}/edit', array(
 		'as' => 'collections.edit',
 		'uses' => 'CollectionController@edit',
 	));
 
-	Route::put('/collections/{collection}', array(
+	Route::put('/collections/{id}', array(
 		'as' => 'collections.update',
 		'before' => 'csrf',
 		'uses' => 'CollectionController@update',
 	));
 
-	Route::delete('/collections/{collection}', array(
+	Route::delete('/collections/{id}', array(
 		'as' => 'collections.destroy',
 		'before' => 'csrf',
 		'uses' => 'CollectionController@destroy',
@@ -159,39 +162,39 @@ Route::group(array('before' => 'auth'), function() {
 	|--------------------------------------------------------------------------
 	*/
 
-	Route::get('/registers/{collection}', array(
+	Route::get('/registers/{slug}', array(
 		'as' => 'registers',
 		'uses' => 'RegisterController@index',
 	));
 
-	Route::get('/registers/{collection}/create', array(
+	Route::get('/registers/{slug}/create', array(
 		'as' => 'registers.create',
 		'uses' => 'RegisterController@create',
 	));
 
-	Route::post('/registers/{collection}', array(
+	Route::post('/registers/{slug}', array(
 		'as' => 'registers.store',
 		'before' => 'csrf',
 		'uses' => 'RegisterController@store',
 	));
 
-	Route::get('/registers/{collection}/{register}', array(
+	Route::get('/registers/{slug}/{id}', array(
 		'as' => 'registers.show',
 		'uses' => 'RegisterController@show',
 	));
 
-	Route::get('/registers/{collection}/{register}/edit', array(
+	Route::get('/registers/{slug}/{id}/edit', array(
 		'as' => 'registers.edit',
 		'uses' => 'RegisterController@edit',
 	));
 
-	Route::put('/registers/{collection}/{register}', array(
+	Route::put('/registers/{slug}/{id}', array(
 		'as' => 'registers.update',
 		'before' => 'csrf',
 		'uses' => 'RegisterController@update',
 	));
 
-	Route::delete('/registers/{collection}/{register}', array(
+	Route::delete('/registers/{slug}/{id}', array(
 		'as' => 'registers.destroy',
 		'before' => 'csrf',
 		'uses' => 'RegisterController@destroy',
