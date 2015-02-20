@@ -40,3 +40,4 @@
 
 {{ Form::close() }}
 
+<a href="{{ route('dashboard') }}">Cancel</a>
