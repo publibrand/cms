@@ -145,6 +145,23 @@ var Form = (function(){
 
     }
 
+    _public.floatLabel = function($inputs, event) {
+        event = event || '';
+
+        $inputs.each(function() {
+            if($(this).val() !== '' || event == 'focus') {
+                if($(this).attr('data-placeholder') == undefined) {
+                    $(this).attr('data-placeholder', $(this).attr('placeholder'));
+                }
+                $(this).attr('placeholder', '');
+                $(this).siblings('label').slideDown();
+            } else {
+                $(this).attr('placeholder', $(this).attr('data-placeholder'));
+                $(this).siblings('label').slideUp();
+            }
+        });
+    }
+
     _public.csrf = function(){
 
         $.ajaxSetup({

@@ -38,6 +38,14 @@
 
         @yield('content')
     
+        @if(Sentry::check())
+            <footer class="footer">
+                <span class="container">
+                    Desenvolvido pela <a href="http://publibrand.com.br/">Publibrand</a> - Fork us on <a class="github" href="http://github.com/publibrand/cms/">Github</a>
+                </span>
+            </footer>
+        @endif
+
         @foreach ($assets['javascript'] as $asset)
             {{ HTML::script($asset) }}
         @endforeach

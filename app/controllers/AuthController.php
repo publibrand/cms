@@ -4,7 +4,8 @@ class AuthController extends BaseController {
 
 	public function login() {
 		
-		return View::make('auth.index');
+		return View::make('auth.index')
+				   ->with('pageClass', 'auth-page');
 
 	}
 
@@ -67,19 +68,24 @@ class AuthController extends BaseController {
 
 	public function forgot() {
 
-		return View::make('auth.forgot');
+		return View::make('auth.forgot')
+				   ->with('pageClass', 'auth-page');;
 		
 	}
 
 	private function generateToken($user) {
+
 		return base64_encode(serialize([
 			'user' => $user->id,
 			'token' => $user->getResetPasswordCode(),
 		]));
+
 	}
 
 	private function decodeToken($token) {
+
 		return unserialize(base64_decode($token));
+
 	}
 
 	public function forgotSend() {
@@ -131,6 +137,7 @@ class AuthController extends BaseController {
 	public function changePassword($token) {
 
 		return View::make('auth.change')
+				   ->with('pageClass', 'auth-page')
 				   ->with('token', $token);
 
 	}

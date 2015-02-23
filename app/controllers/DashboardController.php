@@ -10,8 +10,9 @@ class DashboardController extends BaseController {
 
 			$activities = file($log);
 			$activities = array_map('json_decode', $activities);
-
-			return array_reverse($activities, TRUE);
+			$activities = array_reverse($activities, TRUE);
+		
+			return array_slice($activities, 0, 10);  
 
 		} catch(ErrorException $e) {
 

@@ -12,4 +12,26 @@ $(document).ready(function() {
 
     });
 
+    Form.floatLabel($('.form-float-label input, .form-float-label textarea'));
+
+    $('.form-float-label input, .form-float-label textarea').on('focus keyup blur', function(event){
+		Form.floatLabel($(this), event.type);
+    });
+
+    $('.dashboard .collections').on('click', '.collection-drop', function() {
+        $(this).siblings('.collection-actions').fadeToggle();
+    })
+
+    $('body').on('click', '.minimize', function() {
+        $(this).siblings('.activities').slideToggle();
+    });
+
+    $('.bars').on('click', function() {
+        $('.menu-list').slideToggle();
+    });
+
+    $('.menu-list li').on('click', function() {
+        $(this).find('ul').slideToggle();
+    });
+
 });

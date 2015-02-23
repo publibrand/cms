@@ -1,10 +1,16 @@
 <header class="header">
 	<div class="container">
 		<nav class="menu">
-			<a href="{{ url('/') }}">
+			<a class="title" href="{{ url('/') }}">
 				<h1>Title</h1>
 			</a>
-			<ul>
+			<span class="bars">
+				<span></span>
+				<span></span>
+				<span></span>
+			</span>
+			<div class="clear-fix"></div>
+			<ul class="menu-list">
 				<li class="drop-down">
 					Pages
 					<ul>
@@ -15,12 +21,12 @@
 								</li>
 							@endforeach
 						@endif
-						<li>
-							<a href="{{ route('registers.create', 'pages') }}">Add +</a>
+						<li class="more">
+							<a href="{{ route('registers.create', 'pages') }}">+</a>
 						</li>
 					</ul>
 				</li>
-				<li class="drop-down">
+				<li class="drop-down collections">
 					Collections
 					<ul>
 						@if(count($menu['collections']) > 0)
@@ -30,12 +36,12 @@
 								</li>
 							@endforeach
 						@endif
-						<li>
-							<a href="{{ route('collections.create') }}">Add +</a>
+						<li class="more">
+							<a href="{{ route('collections.create') }}">+</a>
 						</li>
 					</ul>
 				</li>
-				<li>
+				<li class="config">
 					<a href="{{ route('registers', 'config') }}">Config</a>
 				</li>
 				<li class="drop-down">
