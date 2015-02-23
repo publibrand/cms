@@ -21,6 +21,14 @@
 		{{ Form::text('max', -1) }}
 		<span class="form-message"></span>
 	</div>
+	
+	<hr/>
+
+	<div class="form-group">
+		{{ Form::label('regname', 'Register name') }}
+		{{ Form::text('regname', 'Name',['disabled' => 'disabled']) }}
+		<span class="form-message"></span>
+	</div>
 
 	<div class="form-fields">
 		@if(isset($collection))
@@ -42,3 +50,4 @@
 
 {{ Form::close() }}
 
+<a href="{{ route('collections') }}">Cancel</a>

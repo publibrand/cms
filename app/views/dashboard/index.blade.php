@@ -26,7 +26,7 @@
 						<ul>
 							@foreach($activities as $activity )
 								<li>
-									 <strong>{{ $activity->user->first_name }}</strong> {{ $activity->action }} <strong>{{ $activity->entity->name }}</strong> at {{ date('d M, H:i ', $activity->date) }}.
+									 <strong>{{ $activity->user->first_name }}</strong> {{ $activity->action }} <strong>{{ isset($activity->entity->name) ? $activity->entity->name : $activity->entity->first_name }}</strong> at {{ date('d M, H:i ', $activity->date) }}.
 								</li>
 							@endforeach
 						</ul>

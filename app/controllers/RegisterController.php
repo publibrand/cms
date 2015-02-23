@@ -28,7 +28,7 @@ class RegisterController extends BaseController {
 		}
 
 		return View::make('dashboard.registers.index')
-				   ->with('registers', $registers->get());
+				   ->with('collection', $collection);
 
 	}
 
@@ -264,14 +264,12 @@ class RegisterController extends BaseController {
 
 	}
 
-	public function destroy($id) {
+	public function destroy($slug, $id) {
 
 		$register = Register::find($id);
 		$register->delete();
 
-		return Response::json([
-			'redirect' => route('registers'),
-        ], 200); 
+		return Redirect::to('/registers/'.$slug);
 
 	}
 

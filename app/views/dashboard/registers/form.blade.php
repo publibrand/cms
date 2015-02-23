@@ -25,3 +25,8 @@
 
 {{ Form::close() }}
 
+@if($collection->max != 1)
+	<a href="{{ route('registers', $collection->slug) }}">Cancel</a>
+@else
+	<a href="{{ route('dashboard') }}">Cancel</a>
+@endif

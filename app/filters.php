@@ -51,7 +51,7 @@ Route::filter('auth', function() {
 
 Route::filter('auth.isUser', function($route) {
 	
-	if ((int)Sentry::getUser()->id !== (int)$route->getParameter('user')) {
+	if ((int)Sentry::getUser()->id !== (int)$route->getParameter('id')) {
 		if (Request::ajax()) {
 			return Response::make('Unauthorized', 401);
 		} else {
