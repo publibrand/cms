@@ -156,6 +156,10 @@ form{
 		height: 23px;
 		margin-top: 12px;
 		cursor: pointer;
+		display: none;
+		+tablet(){
+			display: block;
+		}
 		span{
 			float: left;
 			width: 100%;
@@ -303,6 +307,10 @@ form{
 			font-size: 11px;
 			font-weight: normal;
 			color: #a9a9a9;
+			+tablet(){
+				float: left;
+				width: 100%;
+			}
 		}
 	}
 	.dashboard-collections {
@@ -323,6 +331,10 @@ form{
 		.search-form {
 			position: relative;
 			float: right;
+			+tablet(){
+				float: left;
+				width: 100%;
+			}
 			input[type='text'] {
 				float: left;
 				padding: 0;
