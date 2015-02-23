@@ -8,12 +8,14 @@ var uglify = require('gulp-uglify');
 var livereload = require('gulp-livereload');
 var rename = require('gulp-rename');
 var autoprefixer = require('gulp-autoprefixer');
+var sourcemaps = require('gulp-sourcemaps');
 
 // ---- Compile Stylus ---- //
 
 gulp.task('stylus', function() {
     gulp.src("public/dev/stylus/**.styl")
         .pipe(stylus({
+            sourcemaps: true,
             compress: true,
         }))
         .pipe(autoprefixer({
@@ -29,8 +31,10 @@ gulp.task('stylus', function() {
 
 gulp.task('js', function() {
     gulp.src('public/dev/js/**/*.js')
+      .pipe(sourcemaps.init())
       .pipe(concat('scripts.min.js'))
       .pipe(uglify())
+      .pipe(sourcemaps.write( '.' ))
       .pipe(gulp.dest('public/assets/js'))
       .pipe(livereload());
 });
