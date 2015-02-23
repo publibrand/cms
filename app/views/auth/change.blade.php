@@ -3,7 +3,7 @@
 @section('content')
 	
 	<div class="login">
-		{{ Form::open(['route' => 'auth.forgot.check', 'method' => 'POST', 'class' => 'ajax-form']) }}
+		{{ Form::open(['route' => ['auth.forgot.check', $token], 'method' => 'POST', 'class' => 'ajax-form']) }}
 			
 			<div class="form-group">
 				{{ Form::label('password', 'Password') }}

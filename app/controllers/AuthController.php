@@ -79,7 +79,7 @@ class AuthController extends BaseController {
 	}
 
 	private function decodeToken($token) {
-		return base64_decode(unserialize($token));
+		return unserialize(base64_decode($token));
 	}
 
 	public function forgotSend() {
@@ -122,15 +122,16 @@ class AuthController extends BaseController {
 		}
 
 		return Response::json([
-			'redirect' => Redirect::to('/'),
+			'redirect' => url('/'),
 			'timeout' => 1000,
         ], 200); 
 
 	}
 
-	public function changePassword() {
+	public function changePassword($token) {
 
-		return View::make('auth.change');
+		return View::make('auth.change')
+				   ->with('token', $token);
 
 	}
 
@@ -163,7 +164,7 @@ class AuthController extends BaseController {
 				if ($user->attemptResetPassword($token['token'], Input::get('password'))) {
 					
 					return Response::json([
-						'redirect' => Redirect::to('/'),
+						'redirect' => url('/'),
 						'timeout' => 1000,
 			        ], 200); 
 			        
@@ -186,7 +187,7 @@ class AuthController extends BaseController {
 		}
 
 		return Response::json([
-			'redirect' => Redirect::to('/'),
+			'redirect' => url('/'),
 			'timeout' => 1000,
         ], 200); 
 
