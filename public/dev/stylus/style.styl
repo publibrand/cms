@@ -373,23 +373,25 @@ form{
 			display: block;
 		}
 		.pages-view{
+			min-height: 214px;
 			float: left;
 			width: 50%;
 			border-bottom: 2px solid;
 		}
 		.analytics-info{
+			min-height: 214px;
 			border-bottom: 2px solid #f98191;
 			float: right;
 			width: 50%;
 			background: url("../img/google-analytics.png") 93% 108px no-repeat;
 			.info{
-				float: left;
-				width: 25%;
+				display: inline-block;
+				width: 24%;
 				margin-bottom: 40px;
 				.info-value{
 					font-size: 32px;
 					float: left;
-					widows: 100%;
+					width: 100%;
 					font-weight: bold;
 				}
 				.info-type{
@@ -398,6 +400,30 @@ form{
 					text-transform: uppercase;
 					font-size: 12px;
 				}
+			}
+		}
+		+responsive(1024px) {
+			.pages-view,
+			.analytics-info {
+				width: 100%;
+				text-align:center;
+				background: none;
+			}
+			.pages-view{
+				margin-bottom: 40px;
+			}
+		}
+		+tablet() {
+			.analytics-info .info {
+				width: 50%;
+				.info-value{
+						font-size: 20px;
+				}
+			}
+		}
+		+mobile() {
+			.analytics-info .info{
+					width: 100%;
 			}
 		}
 	}

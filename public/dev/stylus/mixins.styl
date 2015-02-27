@@ -1,4 +1,4 @@
-reponsive($width) {
+responsive($width) {
 
 	@media screen and (max-width: $width) {
 		{block}	
@@ -7,8 +7,8 @@ reponsive($width) {
 }
 
 tablet() {
-
-	@media screen and (max-width: $tablet) {
+		
+	+responsive($tablet) {
 		{block}	
 	}
 
@@ -16,7 +16,7 @@ tablet() {
 
 mobile() {
 
-	@media screen and (max-width: $mobile) {
+	+responsive($mobile) {
 		{block}	
 	}
 

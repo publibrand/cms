@@ -43,7 +43,7 @@ var Analytics = (function() {
 
     }
 
-    _private.draw = function() {
+    _public.draw = function() {
 
         var pagesView = JSON.parse($("#pages-view").attr('data-pages-view'));
 
@@ -90,3 +90,7 @@ var Analytics = (function() {
 }());
 
 Analytics.init();
+
+$(window).resize(function(){
+    Analytics.draw();
+});
