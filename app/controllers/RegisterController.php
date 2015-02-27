@@ -5,10 +5,14 @@ class RegisterController extends BaseController {
 	public function index($slug) {
 
 		try{
+
 			$collection = Collection::where('slug','=', $slug)
 									->firstOrFail();
+
 		} catch(Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
 			return Redirect::to('/');
+
 		}
 
 		$registers = $collection->registers();
@@ -35,10 +39,14 @@ class RegisterController extends BaseController {
 	public function create($slug) {
 		
 		try{
+
 			$collection = Collection::where('slug','=', $slug)
 									->firstOrFail();
+
 		} catch(Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
 			return Redirect::to('/');
+
 		}
 		
 		if($collection->max == 1 && $collection->registers()->count() == 1) {
@@ -174,6 +182,7 @@ class RegisterController extends BaseController {
 	public function show($slug, $id){
 
 		try{
+
 			$collection = Collection::where('slug','=', $slug)
 									->firstOrFail();
 
@@ -181,7 +190,9 @@ class RegisterController extends BaseController {
 								   ->findOrFail($id);
 
 		} catch(Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
 			return Redirect::to('/');
+
 		}
 
 		$metaData = $register->metaData()
@@ -210,13 +221,17 @@ class RegisterController extends BaseController {
 	public function edit($slug, $id) {
 
 		try{
+
 			$collection = Collection::where('slug', '=', $slug)
 								    ->firstOrFail();
 
 			$register = $collection->registers()
 								   ->findOrFail($id);
+
 		} catch(Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
 			return Redirect::to('/');
+			
 		}
 
 		$metaData = $register->metaData()

@@ -34,6 +34,16 @@
 		<span class="form-message"></span>
 	</div>
 
+	@if($authUserGroup->name == 'Developer')
+
+		<div class="form-group">
+			{{ Form::label('group', 'Group') }}
+			{{ Form::select('group', $groups, isset($userGroup) ? $userGroup->id : NULL ) }}
+			<span class="form-message"></span>
+		</div>
+		
+	@endif
+
 	<span class="form-status"></span>
 	
 	{{ Form::submit('Save'); }}

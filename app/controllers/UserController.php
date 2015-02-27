@@ -11,9 +11,22 @@ class UserController extends BaseController {
                    
 	}
 
+	private function getGroups() {
+
+		$groups = [];
+
+		foreach(Sentry::findAllGroups() as $group) {
+			$groups[$group->id] = $group->name;
+		}
+
+		return $groups;
+
+	}
+
 	public function create() {
 
-		return View::make('dashboard.users.create');
+		return View::make('dashboard.users.create')
+				   ->with('groups', $this->getGroups());
 
 	}
 
@@ -52,6 +65,10 @@ class UserController extends BaseController {
 	        'activated' => TRUE,
 	    ]);
 
+	    $group = Sentry::findGroupById(Input::get('group'));
+
+	    $user->addGroup($group);
+
     	return Response::json([
 			'redirect' => route('auth'),
 			'timeout' => 1000,
@@ -80,16 +97,19 @@ class UserController extends BaseController {
 
 	public function edit($id) {
 
-		$user = User::find($id);
-
+		$user = Sentry::findUserByID($id);
+		$group = User::getGroup($id);
+	
 		return View::make('dashboard.users.edit')
-				   ->with('user', $user);
+				   ->with('user', $user)
+				   ->with('userGroup', $group)
+				   ->with('groups', $this->getGroups());
 	
 	}
 
 	public function update($id) {
 
-		$user = User::find($id);
+		$user = Sentry::findUserByID($id);
 
 		$labels = [
 			'first_name' => 'First name',
@@ -130,6 +150,14 @@ class UserController extends BaseController {
 		}
 
 		$user->save();
+
+		if(Input::has('group')) {
+			$group = User::getGroup($id);
+			$user->removeGroup($group);
+			
+			$group = Sentry::findGroupById(Input::get('group'));
+			$user->addGroup($group);
+		}
 
     	return Response::json([
 			'redirect' => route('auth'),

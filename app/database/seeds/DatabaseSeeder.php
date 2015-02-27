@@ -13,7 +13,8 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('CreatePagesCollection');
 		$this->call('CreateConfigCollection');
-		$this->call('CreateAdmin');
+		$this->call('CreateGroups');
+		$this->call('CreateDeveloper');
 	}
 
 }

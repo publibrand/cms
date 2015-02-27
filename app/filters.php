@@ -13,8 +13,11 @@
 
 App::before(function($request) {
 
-	View::share('menu', BaseController::getMenuItems());
-
+	if(Sentry::check()) {
+		View::share('authUserGroup', User::getGroup());
+		View::share('menu', BaseController::getMenuItems());
+	}
+	
 });
 
 
@@ -49,15 +52,51 @@ Route::filter('auth', function() {
 	
 });
 
-Route::filter('auth.isUser', function($route) {
+Route::filter('auth.isUser', function($route, $request) {
+
+	$user = Sentry::getUser();
+	$isDeveloper = Route::callRouteFilter('auth.isDeveloper', [], $route, $request);
+	$isEditor = Route::callRouteFilter('auth.isEditor', [], $route, $request);
+
+	if(empty($isDeveloper) || empty($isEditor)) {
+		return;
+	}	
 	
-	if ((int)Sentry::getUser()->id !== (int)$route->getParameter('id')) {
+	if ((int) $user->id !== (int) $route->getParameter('id')) {
 		if (Request::ajax()) {
 			return Response::make('Unauthorized', 401);
 		} else {
 			return Redirect::to('/');
 		}
 	}
+
+});
+
+Route::filter('auth.isDeveloper', function($route) {
+	
+	$user = Sentry::getUser();
+	
+	if(!User::inGroup('Developer', $user->id)) {
+		if (Request::ajax()) {
+			return Response::make('Unauthorized', 401);
+		} else {
+			return Redirect::to('/');
+		}
+	} 
+
+});
+
+Route::filter('auth.isEditor', function($route) {
+	
+	$user = Sentry::getUser();
+
+	if(!User::inGroup('Editor', $user->id)) {
+		if (Request::ajax()) {
+			return Response::make('Unauthorized', 401);
+		} else {
+			return Redirect::to('/');
+		}
+	} 
 
 });
 

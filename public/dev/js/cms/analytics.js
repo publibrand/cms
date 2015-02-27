@@ -91,6 +91,6 @@ var Analytics = (function() {
 
 Analytics.init();
 
-$(window).resize(function(){
+$(window).on('load resize', function(){
     Analytics.draw();
 });

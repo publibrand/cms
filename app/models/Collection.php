@@ -20,14 +20,22 @@ class Collection extends BaseModel {
 
 	public function scopeConfig($query, $key) {
 
-		return $query->where('slug','=', 'config')
-					 ->firstOrFail()
-					 ->registers()
-			      	 ->firstOrFail()
-					 ->metaData()
-					 ->where('key', '=', $key)
-					 ->first()
-					 ->value;
+		try{
+
+			return $query->where('slug','=', 'config')
+						 ->firstOrFail()
+						 ->registers()
+				      	 ->firstOrFail()
+						 ->metaData()
+						 ->where('key', '=', $key)
+						 ->first()
+						 ->value;
+
+		} catch(Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+			return [];
+
+		}
 
 	}
 

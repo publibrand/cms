@@ -36,9 +36,11 @@
 								</li>
 							@endforeach
 						@endif
-						<li class="more">
-							<a href="{{ route('collections.create') }}">+</a>
-						</li>
+						@if($authUserGroup->name == 'Developer') 
+							<li class="more">
+								<a href="{{ route('collections.create') }}">+</a>
+							</li>
+						@endif
 					</ul>
 				</li>
 				<li class="config">

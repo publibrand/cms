@@ -81,7 +81,7 @@ Route::group(array('before' => 'auth'), function() {
 
 	Route::post('/users', array(
 		'as' => 'users.store',
-		'before' => 'csrf',
+		'before' => 'csrf|auth.isUser',
 		'uses' => 'UserController@store',
 	));
 
@@ -98,13 +98,13 @@ Route::group(array('before' => 'auth'), function() {
 
 	Route::put('/users/{id}', array(
 		'as' => 'users.update',
-		'before' => 'csrf',
+		'before' => 'csrf|auth.isUser',
 		'uses' => 'UserController@update',
 	));
 
 	Route::delete('/users/{id}', array(
 		'as' => 'users.destroy',
-		'before' => 'csrf',
+		'before' => 'csrf|auth.isUser',
 		'uses' => 'UserController@destroy',
 	));
 
@@ -133,12 +133,13 @@ Route::group(array('before' => 'auth'), function() {
 
 	Route::get('/collections/create', array(
 		'as' => 'collections.create',
+		'before' => 'auth.isDeveloper',
 		'uses' => 'CollectionController@create',
 	));
 
 	Route::post('/collections', array(
 		'as' => 'collections.store',
-		'before' => 'csrf',
+		'before' => 'csrf|auth.isDeveloper',
 		'uses' => 'CollectionController@store',
 	));
 
@@ -149,23 +150,25 @@ Route::group(array('before' => 'auth'), function() {
 
 	Route::get('/collections/{id}/edit', array(
 		'as' => 'collections.edit',
+		'before' => 'auth.isDeveloper',
 		'uses' => 'CollectionController@edit',
 	));
 
 	Route::put('/collections/{id}', array(
 		'as' => 'collections.update',
-		'before' => 'csrf',
+		'before' => 'csrf|auth.isDeveloper',
 		'uses' => 'CollectionController@update',
 	));
 
 	Route::delete('/collections/{id}', array(
 		'as' => 'collections.destroy',
-		'before' => 'csrf',
+		'before' => 'csrf|auth.isDeveloper',
 		'uses' => 'CollectionController@destroy',
 	));
 
 	Route::post('/collections/addField', array(
 		'as' => 'collections.addField',
+		'before' => 'auth.isDeveloper',
 		'uses' => 'CollectionController@addField',
 	));
 
