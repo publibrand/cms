@@ -24,6 +24,23 @@ class DashboardController extends BaseController {
 
 	}
 
+	private function getAnalyticsInfo() {
+
+		$analytics = new \Google\Analytics();
+		
+		$analyticsInfo = [];
+		$analyticsInfo['pagesViewLastWeek'] = json_encode($analytics->pagesViewLastWeek());
+		$analyticsInfo['sessions'] = $analytics->sessions();
+		$analyticsInfo['users'] = $analytics->users();
+		$analyticsInfo['pages'] = $analytics->pages();
+		$analyticsInfo['pagesViewBySession'] = $analytics->pagesViewBySession();
+		$analyticsInfo['avgDuration'] = $analytics->avgDuration();
+		$analyticsInfo['bounceRate'] = $analytics->bounceRate();
+		$analyticsInfo['newSessions'] = $analytics->newSessions();
+
+		return $analyticsInfo;
+	}
+
 	public function index() {
 		
 		$collections = Collection::where('slug', '!=', 'config')
@@ -33,7 +50,8 @@ class DashboardController extends BaseController {
 
 		return View::make('dashboard.index')
 				   ->with('collections', $collections)
-				   ->with('activities', $activities);
+				   ->with('activities', $activities)
+				   ->with('analytics', $this->getAnalyticsInfo());
 
 	}
 

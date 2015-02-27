@@ -8,6 +8,7 @@
 				Dashboard 
 				<span class="legend">configure the elements of your admin page</span>
 			</h1>
+			@include('dashboard.analytics')
 			<div class="dashboard-collections">
 				<div class="collections-header">
 					<h2>My data</h2>
@@ -28,10 +29,12 @@
 		</div>
 		<div class="dashboard-activities">
 			<div class="container">
-				<h2>
-					Recent activities
-				</h2>
-				<span class="minimize">-</span>
+				<div class="activities-header">
+					<h2>
+						Recent activities
+					</h2>
+					<span class="minimize">-</span>
+				</div>
 				<div class="activities">
 					@if(count($activities) > 0)
 						<ul>

@@ -23,7 +23,7 @@
 			{{ Form::close() }}
 			<div class="clear-fix"></div>
 
-			<span class="author">Desenvolvido por <a href="http://publibrand.com.br/">Publibrand</a>.</span>
+			<span class="author">Developed by <a href="http://publibrand.com.br/">Publibrand</a>.</span>
 		</div> 
 	</div>
 

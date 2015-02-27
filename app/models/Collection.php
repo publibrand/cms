@@ -18,4 +18,17 @@ class Collection extends BaseModel {
 	
 	}
 
+	public function scopeConfig($query, $key) {
+
+		return $query->where('slug','=', 'config')
+					 ->firstOrFail()
+					 ->registers()
+			      	 ->firstOrFail()
+					 ->metaData()
+					 ->where('key', '=', $key)
+					 ->first()
+					 ->value;
+
+	}
+
 }

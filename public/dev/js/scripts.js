@@ -23,7 +23,7 @@ $(document).ready(function() {
     })
 
     $('body').on('click', '.minimize', function() {
-        $(this).siblings('.activities').slideToggle();
+        $(this).parent().siblings().slideToggle();
     });
 
     $('.bars').on('click', function() {

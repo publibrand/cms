@@ -5,6 +5,7 @@
             'assets/vendor/jquery/dist/jquery.min.js',
             'assets/vendor/jquery-form/jquery.form.js',
             'assets/vendor/speakingurl/speakingurl.min.js',
+            'https://www.google.com/jsapi',
             'assets/js/scripts.min.js',
         ],
         'stylesheet' => [
@@ -40,15 +41,23 @@
     
         @if(Sentry::check())
             <footer class="footer">
-                <span class="container">
-                    Desenvolvido pela <a href="http://publibrand.com.br/">Publibrand</a> - Fork us on <a class="github" href="http://github.com/publibrand/cms/">Github</a>
-                </span>
+                <div class="container">
+                    <span class="wrap">
+                        <span>
+                            Developed by <a href="http://publibrand.com.br/">Publibrand</a> 
+                        </span>
+                        <span class="divider">-</span> 
+                        <span>
+                            Fork us on <a class="github" href="http://github.com/publibrand/cms/">Github</a>
+                        </span>
+                    </span>
+                </div>
             </footer>
         @endif
 
         @foreach ($assets['javascript'] as $asset)
             {{ HTML::script($asset) }}
         @endforeach
-
+        
     </body>
 </html>
