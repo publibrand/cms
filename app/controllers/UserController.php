@@ -11,6 +11,25 @@ class UserController extends BaseController {
                    
 	}
 
+	private function getPermissions() {
+
+		$permissions = [];
+		$collections = Collection::all();
+
+		foreach($collections as $collection) {
+			$name = strtolower($collection->name);
+
+			$permissions[] = $name . ".create";
+			$permissions[] = $name . ".update";
+			$permissions[] = $name . ".show";
+			$permissions[] = $name . ".delete";
+
+		}		
+
+		return $permissions;
+
+	}
+
 	private function getGroups() {
 
 		$groups = [];
@@ -26,7 +45,8 @@ class UserController extends BaseController {
 	public function create() {
 
 		return View::make('dashboard.users.create')
-				   ->with('groups', $this->getGroups());
+				   ->with('groups', $this->getGroups())
+				   ->with('permissions', $this->getPermissions());
 
 	}
 

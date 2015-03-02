@@ -16,6 +16,9 @@
   "dependencies": {
     "jquery": "~2.*",
     "jquery-form": "~3.*",
-    "speakingurl": "~0.20.0"
+    "speakingurl": "~0.20.0",
+    "trumbowyg": "~1.1.7",
+    "datetimepicker": "~2.4.1",
+    "jQuery-Mask-Plugin": "~1.11.4"
   }
 }

@@ -34,14 +34,24 @@
 		<span class="form-message"></span>
 	</div>
 
-	@if($authUserGroup->name == 'Developer')
+	@if(User::inGroup('Developer'))
 
 		<div class="form-group">
 			{{ Form::label('group', 'Group') }}
 			{{ Form::select('group', $groups, isset($userGroup) ? $userGroup->id : NULL ) }}
 			<span class="form-message"></span>
 		</div>
-		
+
+	<!-- 	<div class="form-group">
+			@foreach($permissions as $permission)
+				<div>
+					{{ Form::checkbox('permission[' . $permission . ']', $permission) }}
+					{{ Form::label('permission[' . $permission . ']', $permission) }}
+				</div>
+			@endforeach
+			<span class="form-message"></span>
+		</div>
+		 -->
 	@endif
 
 	<span class="form-status"></span>

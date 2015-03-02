@@ -23,6 +23,30 @@ class User extends BaseModel implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password', 'remember_token');
 
+	public static function hasAccess($permissions, $id = NULL) {
+
+		$permissions = (array) $permissions;
+
+		if($id == NULL) {
+
+			$user = Sentry::getUser();
+
+		}  else {
+
+			$user = Sentry::findUserById($id);
+
+		}
+
+		foreach($permissions as $permission) {
+			if($user->hasAccess($permission) == FALSE) {
+				return FALSE;
+			}
+		} 
+
+		return TRUE;
+
+	}
+
 	public static function inGroup($group, $id = NULL) {
 
 		if($id == NULL) {

@@ -162,6 +162,46 @@ var Form = (function(){
         });
     }
 
+    _public.wysiwyg = function($element) {
+
+        $element.trumbowyg();
+
+    }
+
+    _public.date = function($element) {
+
+        $element.datetimepicker({
+            timepicker: false,
+            mask: true,
+            format: 'd/m/Y',
+        });
+
+    }
+
+    _public.time = function($element) {
+
+        $element.datetimepicker({
+            datepicker: false,
+            mask: true,
+            format: 'H:i',
+        });
+
+    }
+
+    _public.currency = function($element) {
+
+        $element.mask('000.000.000.000.000,00', {
+            reverse: true
+        });
+
+    }
+
+    _public.phone = function($element) {
+
+        $element.mask('(00) 0000-00009');
+
+    }
+
     _public.csrf = function(){
 
         $.ajaxSetup({

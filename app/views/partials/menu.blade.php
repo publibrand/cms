@@ -43,7 +43,12 @@
 						@endif
 					</ul>
 				</li>
-				<li class="config">
+				@if($authUserGroup->name == 'Developer' || $authUserGroup->name == 'Editor') 
+					<li class="no-drop">
+						<a href="{{ route('users') }}">Users</a>
+					</li>
+				@endif
+				<li class="no-drop">
 					<a href="{{ route('registers', 'config') }}">Config</a>
 				</li>
 				<li class="drop-down">

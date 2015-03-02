@@ -22,6 +22,16 @@ $(document).ready(function() {
         $(this).siblings('.collection-actions').fadeToggle();
     })
 
+    Form.wysiwyg($('.field-wysiwyg'));
+
+    Form.date($('.field-date'));
+
+    Form.time($('.field-time'));
+
+    Form.phone($('.field-phone'));
+
+    Form.currency($('.field-currency'));
+
     $('body').on('click', '.minimize', function() {
         $(this).parent().siblings().slideToggle();
     });

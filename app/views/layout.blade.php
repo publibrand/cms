@@ -5,10 +5,15 @@
             'assets/vendor/jquery/dist/jquery.min.js',
             'assets/vendor/jquery-form/jquery.form.js',
             'assets/vendor/speakingurl/speakingurl.min.js',
+            'assets/vendor/trumbowyg/dist/trumbowyg.min.js',
+            'assets/vendor/datetimepicker/jquery.datetimepicker.js',
+            'assets/vendor/jQuery-Mask-Plugin/dist/jquery.mask.min.js',
             'https://www.google.com/jsapi',
             'assets/js/scripts.min.js',
         ],
         'stylesheet' => [
+            'assets/vendor/trumbowyg/dist/ui/trumbowyg.min.css',
+            'assets/vendor/datetimepicker/jquery.datetimepicker.css',
             'assets/css/style.min.css',
         ],
     ];

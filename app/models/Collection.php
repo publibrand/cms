@@ -8,8 +8,17 @@ class Collection extends BaseModel {
 	
 	public static $fields = [
 		'text' => 'Text',
-		'file' => 'File',
+		'email' => 'Email',
+		'phone' => 'Phone',
+		'textarea' => 'Textarea',
+		'wysiwyg' => 'WYSIWYG',
 		'select' => 'Select',
+		'number' => 'Number',
+		'currency' => 'Currency',
+		'date' => 'Date',
+		'time' => 'Time',
+		'boolean' => 'Yes or No',
+		'file' => 'File',
 	];
 
 	public function registers() {

@@ -105,7 +105,7 @@ class RegisterController extends BaseController {
 
 		$fields = Input::all();
 		$fields = $fields['fields'];
-		
+
 		foreach($fields as $key => $value) {
 			if(Input::hasFile('fields.' . $key)) {
 
@@ -118,7 +118,7 @@ class RegisterController extends BaseController {
 								 ->value;
 
 			}
-			
+
 			if($store) {
 
 				$metaData = new MetaData;
@@ -126,14 +126,24 @@ class RegisterController extends BaseController {
 
 			} else {
 
-				$metaData = MetaData::where('key', '=', $key)
-									->first();
+				try{
+
+					$metaData = MetaData::where('key', '=', $key)
+										->firstOrFail();
+
+				} catch (Exception $e) {
+
+					$metaData = new MetaData;
+					$metaData->registers_id = $register->id;
+
+				}
 
 			}
 
 			$metaData->key = $key;
 			$metaData->value = $value;
 			$metaData->save();
+
 		}
 
 	}

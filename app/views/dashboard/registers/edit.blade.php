@@ -2,6 +2,8 @@
 
 @section('content')
 	
-	@include('dashboard.registers.form')
+	<div class="container">
+		@include('dashboard.registers.form')
+	</div>
 
 @stop
