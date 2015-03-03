@@ -326,8 +326,9 @@ form{
 		background: linear-gradient(to bottom, #e36d73 0%,#f66175 100%);
 		padding: 20px;
 		color: #FFF;
-		.analytics-header, .analytics-charts{
+		.analytics-header, .analytics-charts, .analytics-wrap{
 			float: left;
+			position: relative;
 			width: 100%;
 		}
 		.google-visualization-tooltip{
@@ -364,6 +365,20 @@ form{
 			float: left;
 			width: 100%;
 		}
+		.maximize{
+			position: absolute;
+			bottom: -21px;
+			right: -2px;
+			font-size: 35px;
+			font-weight: bold;
+			padding-left: 10px;
+			cursor: pointer;
+			&.active{
+				bottom: -27px;
+				font-size: 50px;
+				font-weight: normal;
+			}
+		}
 		.minimize{
 			float: right;
 			cursor: pointer;
@@ -371,6 +386,11 @@ form{
 			height: 0;
 			line-height: 0;
 			display: block;
+			&.active{
+				font-size: 35px;
+				font-weight: bold;
+				margin-top: 6px;
+			}
 		}
 		.pages-view{
 			min-height: 214px;
@@ -383,7 +403,7 @@ form{
 			border-bottom: 2px solid #f98191;
 			float: right;
 			width: 50%;
-			background: url("../img/google-analytics.png") 93% 108px no-repeat;
+			background: url("../img/google-analytics.png") 93% 118px no-repeat;
 			.info{
 				display: inline-block;
 				width: 24%;
@@ -399,6 +419,40 @@ form{
 					width: 100%;
 					text-transform: uppercase;
 					font-size: 12px;
+				}
+			}
+		}
+		.analytics-page-views{
+			float: left;
+			display: none;
+			width: 100%;
+			ul{
+				float: left;
+				width: 100%;
+				padding: 0;
+				margin: 0;
+				list-style: none;
+				li{
+					padding: 10px 0;
+					font-size: 14px;
+					border-bottom: 1px solid rgba(255, 255, 255, 0.3)
+					&:last-child{
+						border-bottom: none;
+					}
+					.page{
+						color: #FFF;
+						text-decoration: none;
+						&:hover{
+							text-decoration: underline;
+						}
+					}
+					.views, .views-title{
+						float: right;
+					}
+					.page-title, .views-title{
+						font-weight: bold;
+						color: #FFF;
+					}
 				}
 			}
 		}
@@ -637,6 +691,11 @@ form{
 			position: absolute;
 			top: 12px;
 			line-height: 0;
+			&.active{
+				font-size: 35px;
+				font-weight: bold;
+				margin-top: 6px;
+			}
 		}
 		.activities{
 			float: left;

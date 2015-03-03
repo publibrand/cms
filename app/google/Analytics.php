@@ -45,18 +45,21 @@ class Analytics extends \Google\Google{
 
 	}
 
-	public function get($startDate, $endDate, $metrics) {
+	public function get($startDate, $endDate, $metrics, $params = []) {
 
 		$service = $this->getService();
 
 		$result = $service->data_ga
-						  ->get('ga:' . $this->profileId, $startDate, $endDate, $metrics);
+						  ->get('ga:' . $this->profileId, $startDate, $endDate, $metrics, $params);
 
 		if($result->getRows()) {
 
-			return $result->getRows()[0][0];
+			if(count($result->getRows()) == 1) {
+				return $result->getRows()[0][0];
+			}
 
-		} 
+			return $result->getRows();
+		}
 
 		return 0;
 
@@ -89,13 +92,13 @@ class Analytics extends \Google\Google{
 
 	public function sessions() {
 
-		return (int) $this->get($this->getStartDate(), $this->getEndDate(), 'ga:sessions');
+		return \Helpers\String::thousandsToK((int) $this->get($this->getStartDate(), $this->getEndDate(), 'ga:sessions'));
 
 	}	
 
 	public function users() {
 
-		return (int) $this->get($this->getStartDate(), $this->getEndDate(), 'ga:users');
+		return \Helpers\String::thousandsToK((int) $this->get($this->getStartDate(), $this->getEndDate(), 'ga:users'));
 
 	}
 
@@ -125,7 +128,26 @@ class Analytics extends \Google\Google{
 
 	public function pages() {
 
-		return (int) $this->get($this->getStartDate(), $this->getEndDate(), 'ga:pageviews');
+		return \Helpers\String::thousandsToK((int)$this->get($this->getStartDate(), $this->getEndDate(), 'ga:pageviews'));
+
+	}
+
+	public function getClientSite() {
+
+		return $this->get(date('Y-m-d'), date('Y-m-d'), 'ga:pageviews', [
+			'dimensions' => 'ga:hostname',
+			'max-results' => '1'
+		]);
+
+	}
+
+	public function pageViews() {
+
+		return $this->get($this->getStartDate(), $this->getEndDate(), 'ga:pageviews', [
+			'dimensions' => 'ga:pagePath',
+			'sort' => '-ga:pageviews',
+			'max-results' => '5'
+		]);
 
 	}
 

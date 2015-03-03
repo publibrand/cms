@@ -33,7 +33,24 @@ $(document).ready(function() {
     Form.currency($('.field-currency'));
 
     $('body').on('click', '.minimize', function() {
+        if($(this).text() == '-') {
+            $(this).addClass('active').text('+');
+        } else {
+            $(this).removeClass('active').text('-');
+        }
+
         $(this).parent().siblings().slideToggle();
+    });
+
+    $('body').on('click', '.analytics-charts .maximize', function() {
+
+        if($(this).text() == '+') {
+            $(this).addClass('active').text('-');
+        } else {
+            $(this).removeClass('active').text('+');
+        }
+
+        $('.analytics-page-views').slideToggle();
     });
 
     $('.bars').on('click', function() {

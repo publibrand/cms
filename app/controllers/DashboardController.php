@@ -26,10 +26,11 @@ class DashboardController extends BaseController {
 
 	private function getAnalyticsInfo() {
 
+
 		try{
 
 			$analytics = new \Google\Analytics();
-			
+
 			$analyticsInfo = [];
 			$analyticsInfo['pagesViewLastWeek'] = json_encode($analytics->pagesViewLastWeek());
 			$analyticsInfo['sessions'] = $analytics->sessions();
@@ -39,6 +40,8 @@ class DashboardController extends BaseController {
 			$analyticsInfo['avgDuration'] = $analytics->avgDuration();
 			$analyticsInfo['bounceRate'] = $analytics->bounceRate();
 			$analyticsInfo['newSessions'] = $analytics->newSessions();
+			$analyticsInfo['pageViews'] = $analytics->pageViews();
+			$analyticsInfo['clientSite'] = $analytics->getClientSite();
 
 			return $analyticsInfo;
 
