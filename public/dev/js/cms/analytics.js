@@ -78,6 +78,24 @@ var Analytics = (function() {
 
     }
 
+    _public.update = function() {
+
+        $analytics = $('.dashboard-analytics').addClass('loading');
+
+        $.post(BASEURL + '/analytics').done(function(data) {
+            $analytics.slideUp(function() {
+                $(this).replaceWith(data);
+                $('.dashboard-analytics').hide(0)
+                                         .slideDown(function(){
+                                        
+                    _public.draw();
+                 });
+            });
+
+        });
+
+    }
+
     _public.init = function() {
 
         _private.load();
@@ -92,5 +110,18 @@ var Analytics = (function() {
 Analytics.init();
 
 $(window).on('load resize', function(){
+
     Analytics.draw();
+
+});
+
+$('body').on('click', '.analytics-reload', function(){
+
+    if($(this).hasClass('reloading') == false) {
+        Analytics.update();
+    }
+
+    $(this).addClass('reloading')
+           .text('(reloading...)');
+
 });

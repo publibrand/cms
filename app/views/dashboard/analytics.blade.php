@@ -1,6 +1,6 @@
 <div class="dashboard-analytics">
 	<div class="analytics-header">
-		<h2>My trafic</h2>
+		<h2>My trafic - Updated at {{ $analyticsCreatedAt }} <strong class="analytics-reload">(reload)</strong></h2>
 		<span class="minimize">-</span>
 	</div>
 	<div class="analytics-wrap">

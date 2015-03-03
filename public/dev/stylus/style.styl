@@ -317,7 +317,7 @@ form{
 		float: left;
 		width: 100%;
 		margin-bottom: 50px;
-		background: #e36d73;
+		background-color: #e36d73 !important;
 		background: -moz-linear-gradient(top, #e36d73 0%, #f66175 100%);
 		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e36d73), color-stop(100%,#f66175));
 		background: -webkit-linear-gradient(top, #e36d73 0%,#f66175 100%); 
@@ -326,10 +326,21 @@ form{
 		background: linear-gradient(to bottom, #e36d73 0%,#f66175 100%);
 		padding: 20px;
 		color: #FFF;
+		&.loading{
+			background-image: url('../img/loader.gif');
+			background-position: center;
+			background-repeat: no-repeat;
+		}
 		.analytics-header, .analytics-charts, .analytics-wrap{
 			float: left;
 			position: relative;
 			width: 100%;
+		}
+		.analytics-reload{
+			cursor:pointer;
+			&:hover{
+				text-decoration: underline;
+			}
 		}
 		.google-visualization-tooltip{
 			border: none;

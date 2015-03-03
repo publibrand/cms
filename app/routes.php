@@ -119,6 +119,11 @@ Route::group(array('before' => 'auth'), function() {
 		'uses' => 'DashboardController@index',
 	));
 
+	Route::post('/analytics', array(
+		'as' => 'dashboard',
+		'uses' => 'DashboardController@getAnalytics',
+	));
+
 	/*
 	|--------------------------------------------------------------------------
 	| Collections Routes

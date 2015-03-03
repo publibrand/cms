@@ -24,10 +24,16 @@ class DashboardController extends BaseController {
 
 	}
 
-	private function getAnalyticsInfo() {
+	public function getAnalytics() {
 
 
-		try{
+		try{		
+
+			if(Cache::has('analytics') && Request::isMethod('get')) {
+
+				return Cache::get('analytics');
+
+			} 
 
 			$analytics = new \Google\Analytics();
 
@@ -43,7 +49,14 @@ class DashboardController extends BaseController {
 			$analyticsInfo['pageViews'] = $analytics->pageViews();
 			$analyticsInfo['clientSite'] = $analytics->getClientSite();
 
-			return $analyticsInfo;
+			$view = View::make('dashboard.analytics')
+						->with('analytics', $analyticsInfo)
+				   		->with('analyticsCreatedAt', date('d/m/Y, H:i'))
+				   		->render();
+
+			Cache::forever('analytics', $view);
+
+			return $view;
 
 		} catch(Exception $e) {
 
@@ -56,13 +69,14 @@ class DashboardController extends BaseController {
 		
 		$collections = Collection::where('slug', '!=', 'config')
 								 ->get();
-								 
+	 	
 		$activities = $this->getActivities();
+		$analytics = $this->getAnalytics();
 
 		return View::make('dashboard.index')
 				   ->with('collections', $collections)
 				   ->with('activities', $activities)
-				   ->with('analytics', $this->getAnalyticsInfo());
+				   ->with('analytics',  $analytics);
 
 	}
 

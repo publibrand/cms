@@ -8,7 +8,7 @@
 				Dashboard 
 				<span class="legend">configure the elements of your admin page</span>
 			</h1>
-			@include('dashboard.analytics')
+			{{ $analytics }}
 			<div class="dashboard-collections">
 				<div class="collections-header">
 					<h2>My data</h2>

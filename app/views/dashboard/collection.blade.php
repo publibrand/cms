@@ -7,7 +7,16 @@
 			<span class="collection-total-registers">{{ $collection->registers()->count() }}</span>
 			<span class="collection-name">{{ $collection->name }}</span>
 		</div>
-		<span class="collection-updated">Atualizado em 12:30 de 01/08/1996</span>
+		<?php 
+			try{
+				$lastUpdate = strtotime($collection->registers()->orderBy('updated_at')->first()->updated_at); 
+			} catch(Exception $e) {
+				$lastUpdate = false;
+			}
+		?>
+		@if($lastUpdate !== FALSE)
+			<span class="collection-updated">Updated at {{ date('d/m/Y', $lastUpdate) }}, {{ date('H:i', $lastUpdate) }}</span>
+		@endif
 	</a>
 	@if($authUserGroup->name == 'Developer')
 		<span class="collection-actions">

@@ -276,6 +276,7 @@ class RegisterController extends BaseController {
 		$register = Register::find($id);
 		$register->name = Input::get('name');
 		$register->collections_id = Input::get('collections_id');
+		$register->updated_at = date('Y-m-d H:i:s');
 		$register->save();
 		
 		$this->updateMetaData($register);
