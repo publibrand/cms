@@ -22,7 +22,10 @@
 		],
 		"psr-4": {
             "Google\\": "app\\google"
-        }
+        },
+        "files": [
+        	"app/helpers/helpers.php"
+        ]
 	},
 	"scripts": {
 		"post-install-cmd": [
