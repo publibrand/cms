@@ -76,6 +76,7 @@ var Analytics = (function() {
 
         chart.draw(data, _private.options);
 
+        $('#pages-view div').hide().fadeIn();
     }
 
     _public.update = function() {
@@ -118,10 +119,14 @@ $(window).on('load resize', function(){
 $('body').on('click', '.analytics-reload', function(){
 
     if($(this).hasClass('reloading') == false) {
+        $(this).fadeOut(function(){
+            $(this).addClass('reloading')
+                   .text('(reloading...)');
+           $(this).fadeIn();
+        })
+        
         Analytics.update();
     }
 
-    $(this).addClass('reloading')
-           .text('(reloading...)');
 
 });

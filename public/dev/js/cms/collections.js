@@ -24,7 +24,7 @@ var Collections = (function() {
         $.post(BASEURL + "/collections/search", {
             query: query,
         }).done(function(data) {
-            $collections = $('.collections');
+            $collections = $('.dashboard-collections .collections');
             $collections.children()
                         .remove()
                         .end()

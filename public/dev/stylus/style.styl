@@ -221,6 +221,7 @@ form{
 				position: relative;
 				padding: 20px 50px 20px 25px;
 				font-size: 15px;
+				transition: background 0.1s;
 				&.drop-down:after{
 					width: 0;
 					height: 0;
@@ -327,14 +328,23 @@ form{
 		padding: 20px;
 		color: #FFF;
 		&.loading{
-			background-image: url('../img/loader.gif');
-			background-position: center;
-			background-repeat: no-repeat;
+			.analytics-charts,
+			.analytics-page-views{
+				opacity: 0;
+			}
+			.cube{
+				opacity: 1;
+				display: block;
+			}
 		}
 		.analytics-header, .analytics-charts, .analytics-wrap{
 			float: left;
 			position: relative;
 			width: 100%;
+			transition: opacity .5s;
+		}
+		.analytics-header{
+			line-height: 0;
 		}
 		.analytics-reload{
 			cursor:pointer;

@@ -58,5 +58,7 @@
 		@else
 			<p>You need to set your analytics credentials in the config page</p>
 		@endif
+		
+		@include('partials.loader')
 	</div>
 </div>

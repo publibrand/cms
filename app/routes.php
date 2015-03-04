@@ -120,7 +120,7 @@ Route::group(array('before' => 'auth'), function() {
 	));
 
 	Route::post('/analytics', array(
-		'as' => 'dashboard',
+		'as' => 'analytics',
 		'uses' => 'DashboardController@getAnalytics',
 	));
 
