@@ -74,9 +74,18 @@ var Analytics = (function() {
 
         var chart = new _private.google.visualization.LineChart(document.getElementById('pages-view'));
 
+        var reDraw = false;
+
+        if($('#pages-view div').length) {
+            reDraw = true;
+        }
+
         chart.draw(data, _private.options);
 
-        $('#pages-view div').hide().fadeIn();
+        if(reDraw == false) {
+            $('#pages-view div').hide().fadeIn();
+        }
+
     }
 
     _public.update = function() {
