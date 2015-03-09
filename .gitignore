@@ -1,5 +1,6 @@
 /bootstrap/compiled.php
-/public/assets/*/
+/public/assets/js/*
+/public/assets/css/*
 /public/uploads/
 /public/thumbnails/
 composer.phar
