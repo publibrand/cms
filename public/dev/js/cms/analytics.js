@@ -20,7 +20,7 @@ var Analytics = (function() {
             baselineColor: 'transparent',
         },
         tooltip: { 
-            isHtml: true
+            isHtml: true,
         },
         vAxis: {
             title: '',
@@ -63,7 +63,7 @@ var Analytics = (function() {
 
         $.each(pagesView, function(index, view){
 
-            views.push([view[0], view[1], '<div class="tooltip">' + view[2] + '<span>' + view[1] + ' visits</span>']);
+            views.push([view[0], view[1], '<div id="tooltip" class="tooltip">' + view[2] + '<span>' + view[1] + ' visits</span>']);
 
         });
 
