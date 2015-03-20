@@ -16,6 +16,7 @@ class CreateRegistersTable extends Migration {
 			$table->integer('collections_id');
 			$table->string('name');
 			$table->integer('parent_id');
+			$table->integer('order');
 			$table->timestamps();
 		});
 	}

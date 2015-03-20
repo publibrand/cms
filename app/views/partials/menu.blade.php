@@ -2,7 +2,7 @@
 	<div class="container">
 		<nav class="menu">
 			<a class="title" href="{{ url('/') }}">
-				<h1>Title</h1>
+				<h1>{{ Lang::get('messages.title') }}</h1>
 			</a>
 			<span class="bars">
 				<span></span>
@@ -12,7 +12,7 @@
 			<div class="clear-fix"></div>
 			<ul class="menu-list">
 				<li class="drop-down">
-					Pages
+					{{ Lang::get('messages.pages') }}
 					<ul>
 						@if(count($menu['pages']) > 0)
 							@foreach($menu['pages'] as $page)
@@ -27,7 +27,7 @@
 					</ul>
 				</li>
 				<li class="drop-down collections">
-					Collections
+					{{ Lang::get('messages.collections') }}
 					<ul>
 						@if(count($menu['collections']) > 0)
 							@foreach($menu['collections'] as $collection)
@@ -45,20 +45,20 @@
 				</li>
 				@if($authUserGroup->name == 'Developer' || $authUserGroup->name == 'Editor') 
 					<li class="no-drop">
-						<a href="{{ route('users') }}">Users</a>
+						<a href="{{ route('users') }}">{{ Lang::get('messages.users') }}</a>
 					</li>
 				@endif
 				<li class="no-drop">
-					<a href="{{ route('registers', 'config') }}">Config</a>
+					<a href="{{ route('registers', 'config') }}">{{ Lang::get('messages.config') }}</a>
 				</li>
 				<li class="drop-down">
 					{{ Sentry::getUser()->first_name }}
 					<ul>
 						<li>
-							<a href="{{ route('users.profile') }}">Profile</a>
+							<a href="{{ route('users.profile') }}">{{ Lang::get('messages.profile') }}</a>
 						</li>
 						<li>
-							<a href="{{ route('auth.logout') }}">Logout </a>
+							<a href="{{ route('auth.logout') }}">{{ Lang::get('messages.logout') }}</a>
 						</li>
 					</ul>
 				</li>

@@ -18,7 +18,6 @@ class CreateCollectionsTable extends Migration {
 			$table->text('fields');
 			$table->boolean('is_visible')->default(1);
 			$table->integer('max');
-			$table->integer('order');
 			$table->timestamps();
 		});
 	}

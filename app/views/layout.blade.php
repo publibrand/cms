@@ -7,13 +7,16 @@
             'assets/vendor/speakingurl/speakingurl.min.js',
             'assets/vendor/trumbowyg/dist/trumbowyg.min.js',
             'assets/vendor/datetimepicker/jquery.datetimepicker.js',
+            'assets/vendor/selectize/dist/js/standalone/selectize.min.js',
             'assets/vendor/jQuery-Mask-Plugin/dist/jquery.mask.min.js',
+            'assets/vendor/jquery-ui/jquery-ui.min.js',
             'https://www.google.com/jsapi',
             'assets/js/scripts.min.js',
         ],
         'stylesheet' => [
             'assets/vendor/trumbowyg/dist/ui/trumbowyg.min.css',
             'assets/vendor/datetimepicker/jquery.datetimepicker.css',
+            'assets/vendor/selectize/dist/css/selectize.default.css',
             'assets/css/style.min.css',
         ],
     ];
@@ -34,7 +37,10 @@
             {{ HTML::style($asset) }}
         @endforeach
 
-        <script> var BASEURL = "{{ URL::to('/') }}"; </script>
+        <script>
+			var BASEURL = "{{ URL::to('/') }}";
+			var LANG = JSON.parse('{{ json_encode(Lang::get('messages')) }}') ;
+		</script>
     </head>
     <body class="{{ $pageClass or '' }}">
 
@@ -49,11 +55,11 @@
                 <div class="container">
                     <span class="wrap">
                         <span>
-                            Developed by <a href="http://publibrand.com.br/">Publibrand</a> 
+                            {{ Lang::get('messages.developed_by') }} <a href="http://publibrand.com.br/">Publibrand</a> 
                         </span>
                         <span class="divider">-</span> 
                         <span>
-                            Fork us on <a class="github" href="http://github.com/publibrand/cms/">Github</a>
+                            {{ Lang::get('messages.fork_us_on') }} <a class="github" href="http://github.com/publibrand/cms/">Github</a>
                         </span>
                     </span>
                 </div>

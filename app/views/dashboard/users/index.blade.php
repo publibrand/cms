@@ -4,14 +4,24 @@
 	
 
 <div class="container">
+	<h1 class="general-title">
+		{{ Lang::get('messages.users') }}
+		<a href="{{ route('users.create') }}" class="new-button">{{ Lang::get('messages.user_new') }}</a>
+	</h1>
+	
 	<div class="box">
-		<h2>Users</h2>
-		<ul class="list">
+	
+		<div class="list">
 			@foreach($users as $user)
-				<li>{{ $user->first_name }} - <a href="{{ route('users.edit', $user->id ) }}">Edit</a> </li>
+				<div class="list-line">
+					<span class="drop"></span>
+					<span class="actions">
+						<a href="{{ route('users.edit', $user->id ) }}" title="{{ Lang::get('messages.edit') }}" alt="{{ Lang::get('messages.edit') }}" class="edit"></a>
+					</span>
+					{{ $user->first_name }}
+				</div>
 			@endforeach
-		</ul>
-		<a href="{{ route('users.create') }}">New Register</a>
+		</div>
 	</div>
 </div>
 

@@ -14,7 +14,7 @@ class Register extends BaseModel {
 
 	public function collection() {
 
-		return $this->belongsTo('Collection', 'id');
+		return $this->belongsTo('Collection', 'collections_id', 'id');
 
 	}
 

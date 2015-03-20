@@ -188,7 +188,7 @@ class CollectionController extends BaseController {
 	 	if($collections->count() == 0) {
 	 		return Response::json([
 				'view' => View::make('partials.message')
-							  ->with('message', "No result found for '" . $query . "'")
+							  ->with('message', Lang::get('messages.no_result_found_for')." '" . $query . "'")
 							  ->render(),
 	        ], 200); 
 	 	}

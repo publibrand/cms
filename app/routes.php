@@ -226,5 +226,10 @@ Route::group(array('before' => 'auth'), function() {
 		'uses' => 'RegisterController@destroy',
 	));
 
+	Route::post('/registers/{slug}/reorder', array(
+		'as' => 'registers.reorder',
+		'uses' => 'RegisterController@reorder',
+	));
+
 });
 

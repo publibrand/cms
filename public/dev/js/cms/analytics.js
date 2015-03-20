@@ -63,7 +63,7 @@ var Analytics = (function() {
 
         $.each(pagesView, function(index, view){
 
-            views.push([view[0], view[1], '<div id="tooltip" class="tooltip">' + view[2] + '<span>' + view[1] + ' visits</span>']);
+            views.push([view[0], view[1], '<div id="tooltip" class="tooltip">' + view[2] + '<span>' + view[1] + ' '+ LANG.ga_visits +'</span>']);
 
         });
 
@@ -130,7 +130,7 @@ $('body').on('click', '.analytics-reload', function(){
     if($(this).hasClass('reloading') == false) {
         $(this).fadeOut(function(){
             $(this).addClass('reloading')
-                   .text('(reloading...)');
+                   .text('('+LANG.ga_reloading+')');
            $(this).fadeIn();
         })
         

@@ -9,6 +9,8 @@ var Collections = (function() {
             fieldNumber: fieldNumber,
         }).done(function(data){
             $('.form-fields').append(data.view);
+			Form.setActionBar();
+			$('select').selectize();
         });
 
     }
@@ -76,6 +78,7 @@ $('form.collection-form').on('change', 'select', function () {
 
     if($(this).hasClass("collection-type") && $(this).val() == 'select') {
         $options.fadeIn();
+		Form.collectionOptions();
     } else {
         $options.fadeOut();
         $options.find('input')

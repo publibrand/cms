@@ -4,39 +4,39 @@
 	
 	<div class="auth">
 		<div class="auth-header">
-			<span>Sign in to manage</span>
+			<span>{{ Lang::get('messages.sign_in') }}</span>
 		</div> 
 		<div class="auth-body">
 			{{ Form::open(['route' => 'auth.check', 'method' => 'POST', 'class' => 'ajax-form']) }}
 				
 				<div class="form-group form-float-label">
-					{{ Form::label('email', 'Email') }}
-					{{ Form::email('email', NULL, ['placeholder' => 'E-mail']) }}
+					{{ Form::label('email', Lang::get('messages.email')) }}
+					{{ Form::email('email') }}
 					<span class="form-message"></span>
 				</div>
 
 				<div class="form-group form-float-label">
-					{{ Form::label('password', 'Password') }}
-					{{ Form::password('password', ['placeholder' => 'Password']) }}
+					{{ Form::label('password', Lang::get('messages.password')) }}
+					{{ Form::password('password') }}
 					<span class="form-message"></span>
 				</div>
 
 				<div class="form-group form-remember-me">
 					{{ Form::checkbox('rememberMe', 1, NULL, ['id' => 'rememberMe']) }}
-					{{ Form::label('rememberMe', 'Remember me') }}
+					{{ Form::label('rememberMe', Lang::get('messages.remember_me')) }}
 					<span class="form-message"></span>
 				</div>
 
 				<span class="form-status"></span>
 				
-				{{ link_to_route('auth.forgot', 'Forgot', NULL, ['class' => 'btn']) }}
+				{{ link_to_route('auth.forgot', Lang::get('messages.forgot'), NULL, ['class' => 'btn']) }}
 				
-				{{ Form::submit('Enter'); }}
+				{{ Form::submit(Lang::get('messages.enter')); }}
 
 			{{ Form::close() }}
 			<div class="clear-fix"></div>
 			
-			<span class="author">Developed by <a href="http://publibrand.com.br/">Publibrand</a>.</span> 
+			<span class="author">{{ Lang::get('messages.developed_by') }} <a href="http://publibrand.com.br/">Publibrand</a>.</span> 
 		</div>
 	</div>
 

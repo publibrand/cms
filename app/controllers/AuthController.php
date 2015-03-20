@@ -45,11 +45,11 @@ class AuthController extends BaseController {
 
 	    } catch(Cartalyst\Sentry\Users\WrongPasswordException $e) {
 
-	    	$errorMessage = 'Wrong password, try again.';
+	    	$errorMessage = Lang::get('messages.user_wrongpass');
 
 	    } catch(Cartalyst\Sentry\Users\UserNotFoundException $e) {
 
-	    	$errorMessage = 'User was not found.';
+	    	$errorMessage = Lang::get('messages.user_notfound');
 	    }
 
 		return Response::json([
@@ -122,7 +122,7 @@ class AuthController extends BaseController {
 		} catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
 
 			return Response::json([
-				'errorMessage' => 'User was not found',
+				'errorMessage' => Lang::get('messages.user_notfound'),
             ], 400); 
 
 		}
@@ -188,7 +188,7 @@ class AuthController extends BaseController {
 		} catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
 
 			return Response::json([
-				'errorMessage' => 'User not found',
+				'errorMessage' => Lang::get('messages.user_notfound'),
             ], 400); 
 
 		}

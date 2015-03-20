@@ -141,7 +141,24 @@ var Form = (function(){
 
         separator  = separator  || '-';
 
-        $to.val(getSlug(str, separator));
+        $to.val(getSlug(str, separator)).trigger('change');
+
+    }
+
+    _public.setActionBar = function() {
+		var profooter=$(window).height()-70;
+		$('body > .container').css('min-height',profooter);
+		
+		var foot = $('.footer').position().top;
+		var scroll=$(window).scrollTop()+$(window).height();
+
+		if(foot>(scroll)){
+			$('.action-bar').css('position','fixed');
+			$('.action-bar').css('top','initial');
+		}else{
+			$('.action-bar').css('position','absolute');
+			$('.action-bar').css('top',foot-130);
+		}
 
     }
 
@@ -149,22 +166,48 @@ var Form = (function(){
         event = event || '';
 
         $inputs.each(function() {
-            if($(this).val() !== '' || event == 'focus') {
-                if($(this).attr('data-placeholder') == undefined) {
-                    $(this).attr('data-placeholder', $(this).attr('placeholder'));
-                }
-                $(this).attr('placeholder', '');
-                $(this).siblings('label').slideDown();
-            } else {
-                $(this).attr('placeholder', $(this).attr('data-placeholder'));
-                $(this).siblings('label').slideUp();
+			if(!$(this).parent().hasClass('fixed-label')){
+				if($(this).val() !== '' || event == 'focus') {
+					$(this).siblings('label').css('color',"#929292");
+					$(this).siblings('label').animate({
+						top: 0,
+						fontSize: 13
+					}, 500);
+					
+				} else {
+					if ($(this).parents('.form-fieldset').length){
+						$(this).siblings('label').css('color',"#FFFFFF");
+					}else{
+						$(this).siblings('label').css('color',"#354052");
+					}
+					$(this).siblings('label').animate({
+						top: 28,
+						fontSize: 18
+					}, 500);
+				}
             }
         });
     }
 
+    _public.collectionOptions = function() {
+
+        $('.collection-options input').selectize({
+			plugins: ['remove_button','drag_drop'],
+			delimiter: ';',
+			persist: false,
+			create: function(input) {
+				return {
+					value: input,
+					text: input
+				}
+			}
+		});
+
+    }
+
     _public.wysiwyg = function($element) {
 
-        $element.trumbowyg();
+        $element.trumbowyg({btns: ['bold', 'italic', 'link']});
 
     }
 
@@ -199,6 +242,12 @@ var Form = (function(){
     _public.phone = function($element) {
 
         $element.mask('(00) 0000-00009');
+
+    }
+
+    _public.number = function($element) {
+
+        $element.mask('0#');
 
     }
 

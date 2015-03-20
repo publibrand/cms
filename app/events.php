@@ -7,7 +7,7 @@
 */
 
 Event::listen('activities.store', function($action, $entity) {
-
+	
 	if($entity->slug == NULL) {
 		$route = route('registers.edit', [$entity->collection->slug, $entity->id]);
 	} else {

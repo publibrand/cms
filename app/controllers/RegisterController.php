@@ -23,7 +23,7 @@ class RegisterController extends BaseController {
 				return Redirect::route('registers.create', $slug);
 			}
 
-			return Redirect::route('registers.show', [
+			return Redirect::route('registers.edit', [
 				$slug,
 				$registers->first()
 						  ->id,
@@ -127,8 +127,8 @@ class RegisterController extends BaseController {
 			} else {
 
 				try{
-
 					$metaData = MetaData::where('key', '=', $key)
+										->where('registers_id', '=', $register->id)
 										->firstOrFail();
 
 				} catch (Exception $e) {
@@ -272,6 +272,7 @@ class RegisterController extends BaseController {
             ], 400);
              
 		}
+			
 		
 		$register = Register::find($id);
 		$register->name = Input::get('name');
@@ -287,6 +288,18 @@ class RegisterController extends BaseController {
 			'timeiout' => 1000,
 		], 200);
 		
+
+	}
+
+	public function reorder($slug) {
+		
+		$counter=0;
+		foreach(Input::get('reordered') AS $reg_id){
+			$counter++;
+			$register = Register::find($reg_id);
+			$register->order = $counter;
+			$register->save();
+		}
 
 	}
 

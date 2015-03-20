@@ -53,20 +53,18 @@ class UserController extends BaseController {
 
 	public function store() {
 
+		$password=Str::random(8);
+		
 		$labels = [
 			'first_name' => 'First name',
 	    	'last_name' => 'Last name',
 	    	'email' => 'E-mail',
-	    	'password' => 'Password',
-	    	'password_confirmation' => 'Password confirmation',
 		];
 
 		$rules = [
             'first_name' => 'required',
 	    	'last_name' => 'required',
 	    	'email' => 'required|email|unique:users',
-	    	'password' => 'required',
-	    	'password_confirmation' => 'required|same:password',
 		];
 
         $validator = Validator::make(Input::all(), $rules, [], $labels);
@@ -81,7 +79,7 @@ class UserController extends BaseController {
 			'first_name' => Input::get('first_name'),
 			'last_name' => Input::get('last_name'),
 	        'email'     => Input::get('email'),
-	        'password'  => Input::get('password'),
+	        'password'  => $password,
 	        'activated' => TRUE,
 	    ]);
 
@@ -89,6 +87,15 @@ class UserController extends BaseController {
 
 	    $user->addGroup($group);
 
+		Mail::send('emails.new-user', [
+			'user' => $user->email,
+			'password' => $password
+		], function($message) use($user) {
+			$message->to($user->email, $user->first_name)
+					->subject('New user');
+		});
+		
+		
     	return Response::json([
 			'redirect' => route('auth'),
 			'timeout' => 1000,

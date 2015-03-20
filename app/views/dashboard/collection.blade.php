@@ -15,14 +15,14 @@
 			}
 		?>
 		@if($lastUpdate !== FALSE)
-			<span class="collection-updated">Updated at {{ date('d/m/Y', $lastUpdate) }}, {{ date('H:i', $lastUpdate) }}</span>
+			<span class="collection-updated" >{{ Lang::get('messages.updated_at') }} {{ date('d/m/Y', $lastUpdate) }}, {{ date('H:i', $lastUpdate) }}</span>
 		@endif
 	</a>
 	@if($authUserGroup->name == 'Developer')
 		<span class="collection-actions">
-			<a class="view" href="{{ route('registers', $collection->slug) }}">View items</a>
-			<a class="edit" href="{{ route('collections.edit', $collection->id) }}">Edit collection</a>
-			<a class="delete" href="{{ route('collections.destroy', $collection->id) }}">Delete collection</a>
+			<a class="view" href="{{ route('registers', $collection->slug) }}">{{ Lang::get('messages.view_items') }}</a>
+			<a class="edit" href="{{ route('collections.edit', $collection->id) }}">{{ Lang::get('messages.edit_collection') }}</a>
+			<a class="delete" href="{{ route('collections.destroy', $collection->id) }}">{{ Lang::get('messages.delete_collection') }}</a>
 		</span>
 	@endif
 </div>

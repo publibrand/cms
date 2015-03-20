@@ -4,14 +4,25 @@
 	
 
 <div class="container">
+	<h1 class="general-title">
+		{{ Lang::get('messages.collections') }}
+	<a href="{{ route('collections.create') }}" class="new-button">{{ Lang::get('messages.col_new') }}</a>
+	</h1>
+	
 	<div class="box">
-		<h2>Collections</h2>
-		<ul class="list">
+		<div class="list">
 			@foreach($collections as $collection)
-				<li>{{ $collection->name }} - <a href="{{ route('collections.edit', $collection->id ) }}">Edit</a> - <a href="{{ route('collections.destroy', $collection->id ) }}" data-method="DELETE">Delete</a></li>
+				<div class="list-line">
+					<span class="drop"></span>
+					<span class="actions">
+						<a href="{{ route('collections.destroy', $collection->id ) }}" data-method="DELETE" title="{{ Lang::get('messages.delete') }}" alt="{{ Lang::get('messages.delete') }}" class="delete"></a>
+						<a href="{{ route('collections.edit', $collection->id ) }}" title="{{ Lang::get('messages.edit') }}" alt="{{ Lang::get('messages.edit') }}" class="edit"></a>
+					</span>
+					{{ $collection->name }} 
+				</div>
 			@endforeach
-		</ul>
-		<a href="{{ route('collections.create') }}">New Register</a>
+		</div>
+		
 	</div>
 </div>
 

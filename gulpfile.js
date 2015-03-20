@@ -39,9 +39,7 @@ gulp.task('js', function() {
       .pipe(livereload());
 });
 
-gulp.task('default', ['js', 'stylus']);
-
-gulp.task('watch', function() {
+gulp.task('default', ['js', 'stylus'], function() {
     livereload.listen();
     gulp.watch('public/dev/js/**/*.js', ['js']);
     gulp.watch('public/dev/stylus/**/*.styl', ['stylus']);
