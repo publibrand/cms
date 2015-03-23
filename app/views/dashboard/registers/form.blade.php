@@ -30,6 +30,8 @@
 			<a href="{{ route('dashboard') }}">{{ Lang::get('messages.cancel') }}</a>
 		@endif
 		
+		<a href="{{ route('registers.create', $collection->slug) }}">{{ Lang::get('messages.save_create') }}</a>
+		
 		{{ Form::submit(Lang::get('messages.save')); }}
 	</div>
 

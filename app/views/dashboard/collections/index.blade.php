@@ -15,7 +15,7 @@
 				<div class="list-line">
 					<span class="drop"></span>
 					<span class="actions">
-						<a href="{{ route('collections.destroy', $collection->id ) }}" data-method="DELETE" title="{{ Lang::get('messages.delete') }}" alt="{{ Lang::get('messages.delete') }}" class="delete"></a>
+						<a href="{{ route('collections.destroy', $collection->id ) }}" data-confirm="Tem certeza?" data-method="DELETE" title="{{ Lang::get('messages.delete') }}" alt="{{ Lang::get('messages.delete') }}" class="delete"></a>
 						<a href="{{ route('collections.edit', $collection->id ) }}" title="{{ Lang::get('messages.edit') }}" alt="{{ Lang::get('messages.edit') }}" class="edit"></a>
 					</span>
 					{{ $collection->name }} 

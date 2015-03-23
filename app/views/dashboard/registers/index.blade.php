@@ -16,7 +16,7 @@
 				<div class="list-line  ui-state-default" rel="{{ $register->id }}">
 					<span class="drop"></span>
 					<span class="actions">
-						<a href="{{ route('registers.destroy', [$collection->slug,$register->id]) }}" data-method="DELETE" title="{{ Lang::get('messages.delete') }}" alt="{{ Lang::get('messages.delete') }}" class="delete"></a>
+						<a href="{{ route('registers.destroy', [$collection->slug,$register->id]) }}" data-confirm="Tem certeza?" data-method="DELETE" title="{{ Lang::get('messages.delete') }}" alt="{{ Lang::get('messages.delete') }}" class="delete"></a>
 						<a href="{{ route('registers.edit', [$collection->slug,$register->id]) }}" title="{{ Lang::get('messages.edit') }}" alt="{{ Lang::get('messages.edit') }}" class="edit"></a>
 						<span class="handle"></span>
 					</span>

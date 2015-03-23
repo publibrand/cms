@@ -7,7 +7,7 @@ class CollectionController extends BaseController {
 		$collections = Collection::where('is_visible', '=', 1)
 								 ->get();
 
-		return View::make('dashboard.Collections.index')
+		return View::make('dashboard.collections.index')
 				   ->with('collections', $collections);
                    
 	}

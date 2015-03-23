@@ -16,7 +16,6 @@
         'stylesheet' => [
             'assets/vendor/trumbowyg/dist/ui/trumbowyg.min.css',
             'assets/vendor/datetimepicker/jquery.datetimepicker.css',
-            'assets/vendor/selectize/dist/css/selectize.default.css',
             'assets/css/style.min.css',
         ],
     ];

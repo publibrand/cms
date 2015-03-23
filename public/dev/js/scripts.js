@@ -100,11 +100,6 @@ $(document).ready(function() {
 	Form.collectionOptions();
 	
 	
-	$('.actions .delete').on('click',function(){
-		if (!confirm("Tem certeza?")) {
-			return false
-		}
-	});
 	
 	$('.sortable-list').sortable({
 		handle: ".handle",

@@ -16,6 +16,7 @@ return array(
 	"logout"         	  	=> "Sair",
 	
 	"save"					=> "Salvar",
+	"save_create"			=> "Salvar e criar outro",
 	"cancel"				=> "Cancelar",
 	"add_field"				=> "Adicionar campo",
 	"max_registers"			=> "Máximo de registros",
