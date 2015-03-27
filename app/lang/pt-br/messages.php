@@ -10,6 +10,7 @@ return array(
 	"page"             		=> "Página",
 	"pages"             	=> "Páginas",
 	"collections" 			=> "Coleções",
+	"pages" 				=> "Páginas",
 	"config"           		=> "Configurações",
 	"users"           		=> "Usuários",
 	"profile"           	=> "Perfíl",
@@ -38,8 +39,14 @@ return array(
 	"reg_empty"				=> "Nenhum registro encontrado",
 	"col_new"				=> "Nova coleção",
 	"col_edit"				=> "Editar coleção",
+	"col_empty"				=> "Nenhuma categoria encontrada",
 	"user_new"				=> "Novo usuário",
 	"user_edit"				=> "Editar usuário",
+	"pag_new"				=> "Nova página",
+	"pag_edit"				=> "Editar página",
+	"pag_empty"				=> "Nenhuma página encontrada",
+	
+	"linked_col"			=> "Coleções Vinculadas",
 	
 	/* login */
 	

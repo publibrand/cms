@@ -67,7 +67,7 @@ class DashboardController extends BaseController {
 
 	public function index() {
 		
-		$collections = Collection::where('slug', '!=', 'config')
+		$collections = Collection::where('type', '=', 'collection')
 								 ->get();
 	 	
 		$activities = $this->getActivities();

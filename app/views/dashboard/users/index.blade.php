@@ -18,7 +18,7 @@
 					<span class="actions">
 						<a href="{{ route('users.edit', $user->id ) }}" title="{{ Lang::get('messages.edit') }}" alt="{{ Lang::get('messages.edit') }}" class="edit"></a>
 					</span>
-					{{ $user->first_name }}
+					<a href="{{ route('users.edit', $user->id ) }}" >{{ $user->first_name }}</a>
 				</div>
 			@endforeach
 		</div>

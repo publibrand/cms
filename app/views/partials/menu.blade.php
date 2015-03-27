@@ -2,6 +2,7 @@
 	<div class="container">
 		<nav class="menu">
 			<a class="title" href="{{ url('/') }}">
+				{{ HTML::image('assets/img/logo.png', 'logo', ['height'=>'23']) }}
 				<h1>{{ Lang::get('messages.title') }}</h1>
 			</a>
 			<span class="bars">
@@ -17,12 +18,12 @@
 						@if(count($menu['pages']) > 0)
 							@foreach($menu['pages'] as $page)
 								<li>
-									<a href="{{ route('registers.edit', ['pages', $page->id]) }}">{{ $page->name }}</a>
+									<a href="{{ route('registers', $page->slug) }}">{{ $page->name }}</a>
 								</li>
 							@endforeach
 						@endif
 						<li class="more">
-							<a href="{{ route('registers.create', 'pages') }}">+</a>
+							<a href="{{ route('pages.create') }}">+</a>
 						</li>
 					</ul>
 				</li>
@@ -49,7 +50,7 @@
 					</li>
 				@endif
 				<li class="no-drop">
-					<a href="{{ route('registers', 'config') }}">{{ Lang::get('messages.config') }}</a>
+					<a href="{{ route('registers', 'settings') }}">{{ Lang::get('messages.config') }}</a>
 				</li>
 				<li class="drop-down">
 					{{ Sentry::getUser()->first_name }}

@@ -42,6 +42,7 @@ $(document).ready(function() {
                 $(this).removeClass('active').text('-');
             }
             $(this).fadeIn();
+			Form.setActionBar();
         })
         $(this).parent().siblings().slideToggle();
     });
@@ -54,24 +55,27 @@ $(document).ready(function() {
                 $(this).removeClass('active').text('+');
             }
             $(this).fadeIn();
-        });
+		});
 
-        $('.analytics-page-views').slideToggle();
-    });
+		$('.analytics-page-views').slideToggle();
+	});
 
-    $('.bars').on('click', function() {
-        $('.menu-list').slideToggle();
-    });
+	$('.bars').on('click', function() {
+		$('.menu-list').slideToggle();
+	});
 
-    $('.list-line .drop').on('click', function() {
-        $(this).parent().toggleClass('active');
-    });
+	$('.list-line .drop').on('click', function() {
+		$('.list-line').removeClass('active');
+		$('.list-line .drop').show();
+		$(this).parent().addClass('active');
+		$(this).hide();
+	});
 
-    $('.menu-list li').on('click', function() {
-        if($(window).width() <= 768) {
-            $(this).find('ul').slideToggle();
-        }
-    });
+	$('.menu-list li').on('click', function() {
+		if($(window).width() <= 768) {
+			$(this).find('ul').slideToggle();
+		}
+	});
 	
 	
 	Form.setActionBar();
@@ -96,8 +100,9 @@ $(document).ready(function() {
 	$('body').on('click', '.field-boolean label', function() {$(this).toggleClass('checked');});
 	
 	
-	$('select').selectize();
+	Form.select();
 	Form.collectionOptions();
+	Form.bindCollections();
 	
 	
 	
@@ -118,6 +123,24 @@ $(document).ready(function() {
 		}
 	});
 	$('.sortable-list').disableSelection();
+	
+	
+	$('body').on('click', '.save-create', function() {
+		$('input[name="add_new"]').val(1);
+		$('form.bar-form').submit();
+	});
+	
+	
+	$('body').on('change', 'select[name="copy_collection"]', function() {
+		var cid = $(this).val();
+		var fieldNumber = $('.add-field').attr('data-field-number');
+		$('.add-field').attr('data-field-number', parseInt(fieldNumber) + 1);
+		$('.form-fields .form-fieldset').remove();
+		Collections.addCollectionFields(fieldNumber,cid);
+	});
+	
+	
+	
 	
 	
 });

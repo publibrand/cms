@@ -1,18 +1,4 @@
-/**
- * selectize.default.css (v0.12.0) - Default Theme
- * Copyright (c) 2013–2015 Brian Reavis & contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
- * file except in compliance with the License. You may obtain a copy of the License at:
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under
- * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- *
- * @author Brian Reavis <brian@thirdroute.com>
- */
+
 .selectize-control.plugin-drag_drop.multi > .selectize-input > div.ui-sortable-placeholder {
   visibility: visible !important;
   background: #f2f2f2 !important;
@@ -123,6 +109,9 @@
 .form-fieldset .selectize-control.single .selectize-input.input-active {
   background: transparent;
 }
+.fields-header .selectize-control.single .selectize-input.input-active {
+  background: transparent;
+}
 .selectize-input {
 	background: transparent;
 	border:0;
@@ -136,6 +125,10 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+.fields-header .selectize-input {
+	width: auto;
+	padding-right: 30px !important;
 }
 .selectize-control.multi .selectize-input.has-items {
   padding: 5px 8px 2px;
@@ -164,6 +157,10 @@
 }
 .form-fieldset .selectize-input > * {
 	color:#fff;
+}
+.fields-header .selectize-input > * {
+	color:#929292;
+	margin-top: 0px;
 }
 .selectize-control.multi .selectize-input > div {
   cursor: pointer;
@@ -285,6 +282,30 @@
 .form-fieldset .selectize-control.single .selectize-input input {
 	background:transparent;
 }
+.fields-header .selectize-control.single .selectize-input input {
+	background:transparent;
+	font-size:12px;
+}
+.fields-header .selectize-control.single .selectize-input input::-webkit-input-placeholder {
+	color:#929292;
+	text-transform:uppercase;
+	font-size:12px;
+}
+.fields-header .selectize-control.single .selectize-input input:-moz-placeholder{
+	color:#929292;
+	text-transform:uppercase;
+	font-size:12px;
+}
+.fields-header .selectize-control.single .selectize-input input::-moz-placeholder{
+	color:#929292;
+	text-transform:uppercase;
+	font-size:12px;
+}
+.fields-header .selectize-control.single .selectize-input input:-ms-input-placeholder{
+	color:#929292;
+	text-transform:uppercase;
+	font-size:12px;
+}
 .selectize-control.single .selectize-input:after {
   content: ' ';
   display: block;
@@ -298,9 +319,15 @@
   border-width: 5px 5px 0 5px;
   border-color: #808080 transparent transparent transparent;
 }
+.fields-header .selectize-control.single .selectize-input:after {
+	border:0;
+	right: 0px;
+	margin-top: -10px;
+	width: 20px;
+	height: 20px;
+	background:url('../img/files.png');
+}
 .selectize-control.single .selectize-input.dropdown-active:after {
-  
-  
 }
 .selectize-control.rtl.single .selectize-input:after {
   left: 15px;
@@ -342,8 +369,6 @@
 	background-color: #e59c5e;
 	border: 0;
 }
-.selectize-control.single .selectize-input {
-}
 .selectize-control.single .selectize-input{
 	background: transparent;
 	border: 0;
@@ -358,6 +383,13 @@
 	border-bottom: 2px solid #FFFFFF;
 	box-shadow: none;
 }
+.fields-header .selectize-control.single .selectize-input{
+	border-bottom: 0;
+	box-shadow: none;
+	float: right;
+	font-size:12px;
+	text-transform:uppercase;
+}
 .selectize-dropdown.single {
 	background: #354052;
 	color:#fff;
@@ -371,6 +403,10 @@
 .form-fieldset .selectize-dropdown.single {
 	background: #FFFFFF;
 	color:#354052;
+}
+.fields-header .selectize-dropdown.single {
+	background: #141b27;
+	color:#FFFFFF;
 }
 .selectize-dropdown .optgroup-header {
   

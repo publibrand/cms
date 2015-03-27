@@ -20,7 +20,7 @@
 						<a href="{{ route('registers.edit', [$collection->slug,$register->id]) }}" title="{{ Lang::get('messages.edit') }}" alt="{{ Lang::get('messages.edit') }}" class="edit"></a>
 						<span class="handle"></span>
 					</span>
-					{{ $register->name }}
+					<a href="{{ route('registers.edit', [$collection->slug,$register->id]) }}">{{ $register->name }}</a>
 				</div>
 			@endforeach
 			@if(count($collection->registers()->get())==0)

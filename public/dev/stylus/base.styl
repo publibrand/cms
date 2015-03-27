@@ -146,14 +146,8 @@ $mobile = 480px;
   animation: reverse-circles infinite 2.37s;
 }
 
-.plane-1 div {
-  background: #FFF;
-}
-
-.plane-2 div {
-  background: #FFF;
-}
-
+.plane-1 div ,
+.plane-2 div ,
 .plane-3 div {
   background: #FFF;
 }
@@ -201,4 +195,25 @@ $mobile = 480px;
 .bottom-right {
   bottom: 0;
   right: 0;
+}
+
+.loading{
+	display:none;
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+	background:rgba(255, 255, 255, 0.9);
+	z-index:100;
+	
+	.cube {
+		opacity:1;
+	}
+	
+	.plane-1 div ,
+	.plane-2 div ,
+	.plane-3 div {
+	  background: #e4855d;
+	}
 }

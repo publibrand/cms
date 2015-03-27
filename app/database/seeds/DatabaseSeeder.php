@@ -11,7 +11,6 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
-		$this->call('CreatePagesCollection');
 		$this->call('CreateConfigCollection');
 		$this->call('CreateGroups');
 		$this->call('CreateDeveloper');

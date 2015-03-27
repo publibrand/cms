@@ -10,6 +10,9 @@ var Form = (function(){
                  .removeClass('form-error');
 
             $form.find("input[type='submit']").prop('disabled', true);
+			
+			
+			$('.loading').fadeIn(300);
 
             $form.find('.form-status')
                  .show()
@@ -56,7 +59,7 @@ var Form = (function(){
                     $form: $form,
                 });
             }
-
+			
         },
         error: function (result, status, xhr, $form) {
 
@@ -102,7 +105,8 @@ var Form = (function(){
                     $form: $form,
                 });
             }
-
+			
+			$('.loading').fadeOut(300);
         }
     }
 
@@ -146,7 +150,8 @@ var Form = (function(){
     }
 
     _public.setActionBar = function() {
-		var profooter=$(window).height()-70;
+		var sibheight=$('.siblings').height();
+		var profooter=$(window).height()-(70+sibheight);
 		$('body > .container').css('min-height',profooter);
 		
 		var foot = $('.footer').position().top;
@@ -157,7 +162,7 @@ var Form = (function(){
 			$('.action-bar').css('top','initial');
 		}else{
 			$('.action-bar').css('position','absolute');
-			$('.action-bar').css('top',foot-130);
+			$('.action-bar').css('top',foot-90);
 		}
 
     }
@@ -189,9 +194,33 @@ var Form = (function(){
         });
     }
 
+    _public.select = function() {
+
+        $('select').each(function() {
+			$(this).selectize();
+		});
+
+    }
+	
     _public.collectionOptions = function() {
 
         $('.collection-options input').selectize({
+			plugins: ['remove_button','drag_drop'],
+			delimiter: ';',
+			persist: false,
+			create: function(input) {
+				return {
+					value: input,
+					text: input
+				}
+			}
+		});
+
+    }
+
+    _public.bindCollections = function() {
+
+        $('#bind_collections').selectize({
 			plugins: ['remove_button','drag_drop'],
 			delimiter: ';',
 			persist: false,

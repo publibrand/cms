@@ -1,7 +1,7 @@
 @if(isset($user))
-	{{ Form::model($user, ['route' => array('users.update', $user->id), 'method' => 'PUT', 'class' => 'ajax-form derd-form']) }}
+	{{ Form::model($user, ['route' => array('users.update', $user->id), 'method' => 'PUT', 'class' => 'ajax-form bar-form']) }}
 @else
-	{{ Form::open(['route' => 'users.store', 'method' => 'POST', 'class' => 'ajax-form derd-form']) }}
+	{{ Form::open(['route' => 'users.store', 'method' => 'POST', 'class' => 'ajax-form bar-form']) }}
 @endif
 	
 	<div class="form-group form-float-label">

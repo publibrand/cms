@@ -1,13 +1,13 @@
 <?php
 
-class CollectionController extends BaseController {
+class PageController extends BaseController {
 
 	public function index() {
 		
-		$collections = Collection::where('type', '=', 'collection')
+		$collections = Collection::where('type', '=', 'page')
 								 ->get();
 
-		return View::make('dashboard.collections.index')
+		return View::make('dashboard.pages.index')
 				   ->with('collections', $collections);
                    
 	}
@@ -22,7 +22,7 @@ class CollectionController extends BaseController {
 			$options[$col->id] = $col->name;
 		}
 		
-		return View::make('dashboard.collections.create')
+		return View::make('dashboard.pages.create')
 				   ->with('options', $options);
 
 	}
@@ -87,13 +87,23 @@ class CollectionController extends BaseController {
 		$collection = new Collection;
 		$collection->name = Input::get('name');
 		$collection->slug = Input::get('slug');
+		$collection->type = 'page';
 		$collection->fields = $this->formatFields(Input::get('fields'));
 		$collection->max = $this->formatMax(Input::get('max'));
 		$collection->save();
-
+		
+		if(!empty(Input::get('bind_collections'))){
+			foreach(Input::get('bind_collections') as $sibling){
+				$collection_collection = new CollectionHasCollection;
+				$collection_collection->collections_id = $collection->id;
+				$collection_collection->siblings_id = $sibling;
+				$collection_collection->save();
+			}
+		}
+		
 		return Response::json([
 			'collection' => $collection,
-			'redirect' => route('collections'),
+			'redirect' => route('pages'),
 			'timeiout' => 1000,
 		], 200);
 
@@ -112,7 +122,7 @@ class CollectionController extends BaseController {
 
 		}
 
-		return View::make('dashboard.collections.show')
+		return View::make('dashboard.pages.show')
 				   ->with('collection', $collection);
 
 	}
@@ -129,12 +139,26 @@ class CollectionController extends BaseController {
 			
 		}
 		
+		$collections = Collection::where('type', '=', 'collection')->get();
+		$options = [
+			'' => '',
+		];
+		foreach($collections as $col){
+			$options[$col->id] = $col->name;
+		}
+		$selected=[];
+		foreach($collection->siblings as $sibling){
+			$selected[] = $sibling->siblings_id;
+		}
+		
 		$fields = json_decode($collection->fields);
 
-		return View::make('dashboard.collections.edit')
+		return View::make('dashboard.pages.edit')
 				   ->with('collection', $collection)
-				   ->with('fields', $fields);
-	
+				   ->with('fields', $fields)
+				   ->with('options', $options)
+				   ->with('selected', $selected);
+		
 	}
 
 	public function update($id) {
@@ -155,10 +179,25 @@ class CollectionController extends BaseController {
 		$collection->fields = $this->formatFields(Input::get('fields'));
 		$collection->max = $this->formatMax(Input::get('max'));
 		$collection->save();
+		
+		
+		
+		foreach($collection->siblings as $sibling){
+			$sibling->delete();
+		}
+		if(!empty(Input::get('bind_collections'))){
+			foreach(Input::get('bind_collections') as $sibling){
+				$collection_collection = new CollectionHasCollection;
+				$collection_collection->collections_id = $collection->id;
+				$collection_collection->siblings_id = $sibling;
+				$collection_collection->save();
+			}
+		}
+		
 
 		return Response::json([
 			'collection' => $collection,
-			'redirect' => route('collections'),
+			'redirect' => route('pages'),
 			'timeiout' => 1000,
 		], 200);
 
@@ -170,14 +209,14 @@ class CollectionController extends BaseController {
 		$collection->delete();
 
 		return Response::json([
-			'redirect' => route('collections'),
+			'redirect' => route('pages'),
         ], 200); 
 
 	}
 
 	public function addField() {
 
-		$view = View::make('dashboard.collections.field')
+		$view = View::make('dashboard.pages.field')
 				    ->with('fieldNumber', Input::get('fieldNumber'));
 
 		return Response::json([
@@ -194,7 +233,7 @@ class CollectionController extends BaseController {
 		
 		$view = "";
 		foreach($fields as $field) {
-			$view.= View::make('dashboard.collections.field')
+			$view.= View::make('dashboard.pages.field')
 						->with('field', $field)
 						->with('fieldNumber', Input::get('fieldNumber'))
 						->render();
@@ -211,7 +250,7 @@ class CollectionController extends BaseController {
 		$query = trim(Input::get('query'));
 
 		$collections = Collection::where('name', 'like', $query . '%')
-								 ->where('type', '=', 'collection')
+								 ->where('slug', '!=', 'config')
 								 ->get();
 
 	 	if($collections->count() == 0) {

@@ -177,6 +177,12 @@ Route::group(array('before' => 'auth'), function() {
 		'uses' => 'CollectionController@addField',
 	));
 
+	Route::post('/collections/addCollectionFields', array(
+		'as' => 'collections.addCollectionFields',
+		'before' => 'auth.isDeveloper',
+		'uses' => 'CollectionController@addCollectionFields',
+	));
+
 	Route::post('/collections/search', array(
 		'as' => 'collections.search',
 		'uses' => 'CollectionController@search',
@@ -230,6 +236,67 @@ Route::group(array('before' => 'auth'), function() {
 		'as' => 'registers.reorder',
 		'uses' => 'RegisterController@reorder',
 	));
+
+	
+	
+	/*
+	|--------------------------------------------------------------------------
+	| Pages Routes
+	|--------------------------------------------------------------------------
+	*/
+
+	Route::get('/pages', array(
+		'as' => 'pages',
+		'uses' => 'PageController@index',
+	));
+
+	Route::get('/pages/create', array(
+		'as' => 'pages.create',
+		'before' => 'auth.isDeveloper',
+		'uses' => 'PageController@create',
+	));
+
+	Route::post('/pages', array(
+		'as' => 'pages.store',
+		'before' => 'csrf|auth.isDeveloper',
+		'uses' => 'PageController@store',
+	));
+
+	Route::get('/pages/{id}/edit', array(
+		'as' => 'pages.edit',
+		'before' => 'auth.isDeveloper',
+		'uses' => 'PageController@edit',
+	));
+
+	Route::put('/pages/{id}', array(
+		'as' => 'pages.update',
+		'before' => 'csrf|auth.isDeveloper',
+		'uses' => 'PageController@update',
+	));
+
+	Route::delete('/pages/{id}', array(
+		'as' => 'pages.destroy',
+		'before' => 'csrf|auth.isDeveloper',
+		'uses' => 'PageController@destroy',
+	));
+
+	Route::post('/pages/addField', array(
+		'as' => 'pages.addField',
+		'before' => 'auth.isDeveloper',
+		'uses' => 'PageController@addField',
+	));
+
+	Route::post('/pages/addCollectionFields', array(
+		'as' => 'pages.addCollectionFields',
+		'before' => 'auth.isDeveloper',
+		'uses' => 'PageController@addCollectionFields',
+	));
+
+	Route::post('/pages/search', array(
+		'as' => 'pages.search',
+		'uses' => 'PageController@search',
+	));
+
 
 });
 

@@ -10,7 +10,8 @@ return array(
 	"page"             		=> "Page",
 	"pages"             	=> "Pages",
 	"collections" 			=> "Collections",
-	"config"           		=> "Config",
+	"pages" 				=> "Pages",
+	"config"           		=> "Settings",
 	"users"           		=> "Users",
 	"profile"           	=> "Profile",
 	"logout"         	  	=> "Logout",
@@ -38,8 +39,14 @@ return array(
 	"reg_empty"				=> "No register found",
 	"col_new"				=> "New collection",
 	"col_edit"				=> "Edit collection",
+	"col_empty"				=> "No collection found",
 	"user_new"				=> "New user",
 	"user_edit"				=> "Edit user",
+	"pag_new"				=> "New page",
+	"pag_edit"				=> "Edit page",
+	"pag_empty"				=> "No page found",
+	
+	"linked_col"			=> "Linked Collections",
 	
 	/* login */
 	

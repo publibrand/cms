@@ -4,7 +4,8 @@
 	
 	<div class="container">
 		<h1 class="general-title">
-			{{ Lang::get('messages.col_edit') }}
+			{{ Lang::get('messages.collections') }}
+			<span class="legend">{{ Lang::get('messages.col_edit') }}</span>
 		</h1>
 		
 		@include('dashboard.collections.form')	

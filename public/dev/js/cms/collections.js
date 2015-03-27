@@ -8,9 +8,30 @@ var Collections = (function() {
         $.post(BASEURL + "/collections/addField", {
             fieldNumber: fieldNumber,
         }).done(function(data){
+			var posi=$('.add-field').position().top;
+			$('html, body').animate({scrollTop:(posi)},300);
+            $('.form-fields').append('<div class="mu" style="float:left;width: 100%;height:299px;display:none;"></div>');
+			$('.mu').slideDown(300,function(){
+				$('.mu').remove();
+				$('.form-fields').append(data.view);
+				
+				Form.setActionBar();
+				Form.select();
+			});
+        });
+
+    }
+
+    _public.addCollectionFields = function(fieldNumber, collection_id) {
+
+        $.post(BASEURL + "/collections/addCollectionFields", {
+            fieldNumber: fieldNumber,
+            collection_id: collection_id,
+        }).done(function(data){
             $('.form-fields').append(data.view);
 			Form.setActionBar();
-			$('select').selectize();
+			Form.select();
+			Form.collectionOptions();
         });
 
     }

@@ -42,6 +42,9 @@
 		</script>
     </head>
     <body class="{{ $pageClass or '' }}">
+		<div class="loading">
+			@include('partials.loader')
+		</div>
 
         @if(Sentry::check())
             @include('partials.menu')

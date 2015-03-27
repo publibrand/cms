@@ -21,6 +21,12 @@ class Collection extends BaseModel {
 		'file' => 'File',
 	];
 
+	public function siblings() {
+
+		return $this->hasMany('CollectionHasCollection', 'collections_id', 'id');
+	
+	}
+
 	public function registers() {
 
 		return $this->hasMany('Register', 'collections_id', 'id');

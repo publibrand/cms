@@ -6,7 +6,9 @@
 		<div class="container">
 			<h1 class="dashboard-title">
 				{{ Lang::get('messages.dashboard') }}
-				<span class="legend">{{ Lang::get('messages.config_needed') }}</span>
+				@if(empty($analytics))
+					<span class="legend">{{ Lang::get('messages.config_needed') }}</span>
+				@endif
 			</h1>
 			{{ $analytics }}
 			<div class="dashboard-collections">
@@ -44,7 +46,7 @@
 										{{ $activity->user->first_name }} {{ Lang::get('messages.'.$activity->action) }} <strong class="entity">{{ isset($activity->entity->name) ? $activity->entity->name : $activity->entity->first_name }}</strong> {{ Lang::get('messages.at') }} {{ date('d/m/Y, H:i ', $activity->date) }}
 									</span>
 									@if($activity !== 'removed')
-										<a class="view" href="{{ $activity->route }}">{{ Lang::get('messages.view') }}</a>
+										<a class="view" href="{{ url($activity->route) }}">{{ Lang::get('messages.view') }}</a>
 									@endif
 								</li>
 							@endforeach

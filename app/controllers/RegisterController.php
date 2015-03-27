@@ -180,6 +180,14 @@ class RegisterController extends BaseController {
 		
 		$this->storeMetaData($register);
 		
+		if(Input::get('add_new')==1){
+			return Response::json([
+				'register' => $register,
+				'redirect' => route('registers.create', $slug),
+				'timeiout' => 1000,
+			], 200);
+		}
+		
 		return Response::json([
 			'register' => $register,
 			'redirect' => route('registers', $slug),
@@ -281,6 +289,14 @@ class RegisterController extends BaseController {
 		$register->save();
 		
 		$this->updateMetaData($register);
+		
+		if(Input::get('add_new')==1){
+			return Response::json([
+				'register' => $register,
+				'redirect' => route('registers.create', $slug),
+				'timeiout' => 1000,
+			], 200);
+		}
 		
 		return Response::json([
 			'register' => $register,

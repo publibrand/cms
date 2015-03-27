@@ -15,12 +15,10 @@ class BaseController extends Controller {
 
 		$menu = [];
 
-		$menu['collections'] = Collection::where('is_visible', '=', 1)
+		$menu['collections'] = Collection::where('type', '=', 'collection')
 										 ->get();
 
-		$menu['pages'] = Collection::where('slug', '=', 'pages')
-								   ->first()
-								   ->registers()
+		$menu['pages'] = Collection::where('type', '=', 'page')
 								   ->get();
 		return $menu;
 

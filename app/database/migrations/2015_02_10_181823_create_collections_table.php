@@ -16,6 +16,7 @@ class CreateCollectionsTable extends Migration {
 			$table->string('name');
 			$table->text('slug');
 			$table->text('fields');
+			$table->string('type')->default('collection');
 			$table->boolean('is_visible')->default(1);
 			$table->integer('max');
 			$table->timestamps();

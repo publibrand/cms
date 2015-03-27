@@ -107,9 +107,12 @@ class UserController extends BaseController {
 	public function profile(){
 
 		$user = Sentry::getUser();
+		$group = User::getGroup($user->id);
 
-		return View::make('dashboard.users.profile')
-				   ->with('user', $user);
+		return View::make('dashboard.users.edit')
+				   ->with('user', $user)
+				   ->with('userGroup', $group)
+				   ->with('groups', $this->getGroups());
 
 	}
 
